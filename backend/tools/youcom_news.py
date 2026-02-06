@@ -32,6 +32,16 @@ class NewsArticle:
     thumbnail: Optional[str] = None
     article_id: Optional[str] = None
 
+    @property
+    def snippet(self) -> str:
+        """Alias for description."""
+        return self.description
+
+    @property
+    def published_at(self) -> str:
+        """Alias for timestamp."""
+        return self.timestamp
+
 
 def fetch_live_news(
     country: str,

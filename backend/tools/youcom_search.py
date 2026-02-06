@@ -1,14 +1,15 @@
-"""You.com Search API integration for Strands Agent.
+"""You.com Search API integration.
 
 This module provides web search capabilities using the You.com Search API,
 which is a hackathon sponsor tool for the Continual Learning Hackathon.
+
+Migrated from Strands to Google ADK - tool decorators removed.
 """
 
 import os
 import requests
 from typing import List, Dict, Any, Optional
 from datetime import datetime
-from strands import tool
 
 
 def _try_youcom_search(
@@ -105,7 +106,6 @@ def _format_youcom_results(results: List[Dict[str, Any]], query: str) -> str:
     return formatted
 
 
-@tool
 def youcom_search(
     query: str,
     num_results: int = 10,
@@ -137,7 +137,6 @@ def youcom_search(
         return f"You.com search failed: {str(e)}\nPlease check YOUCOM_API_KEY environment variable."
 
 
-@tool
 def youcom_search_with_domains(
     query: str,
     domains: List[str],
@@ -257,7 +256,6 @@ NAAF_SOURCE_REGISTRY = {
 }
 
 
-@tool
 def naaf_layer_search(
     country: str,
     layer_number: int,

@@ -28,12 +28,27 @@ class StoredResearch:
     year: int
     overall_score: float
     tier: str
-    layers: Dict[str, Any]
+    layers: Dict[str, Any]  # Can be layer_scores for backwards compat
     sources: List[str]
-    news_snapshot: List[Dict[str, Any]]  # News at time of research
-    framework_version: str  # Track which rubric version was used
-    generated_at: str
-    research_duration_seconds: float
+    news_snapshot: List[Dict[str, Any]] = None  # News at time of research
+    framework_version: str = "1.0"  # Track which rubric version was used
+    generated_at: str = ""
+    research_duration_seconds: float = 0.0
+    raw_response: str = ""  # Store raw LLM response
+    created_at: str = ""  # Alias for generated_at
+
+    def __post_init__(self):
+        if not self.generated_at and self.created_at:
+            self.generated_at = self.created_at
+        if not self.created_at and self.generated_at:
+            self.created_at = self.generated_at
+        if self.news_snapshot is None:
+            self.news_snapshot = []
+
+    @property
+    def layer_scores(self) -> Dict[str, Any]:
+        """Alias for layers field."""
+        return self.layers
 
 
 class ResearchStore:
@@ -193,6 +208,74 @@ class ResearchStore:
     def has_research(self, country: str) -> bool:
         """Check if we have any research for a country."""
         return country.lower() in self._index["latest_by_country"]
+
+    def save(self, research: StoredResearch) -> str:
+        """
+        Save a StoredResearch object directly.
+
+        Simpler interface for the API layer.
+        """
+        # Save the full research data
+        research_path = self.storage_dir / f"{research.id}.json"
+        with open(research_path, "w") as f:
+            json.dump(asdict(research), f, indent=2, default=str)
+
+        # Update index
+        country_lower = research.country.lower()
+
+        run_meta = {
+            "id": research.id,
+            "country": research.country,
+            "year": research.year,
+            "overall_score": research.overall_score,
+            "tier": research.tier,
+            "generated_at": research.generated_at or research.created_at
+        }
+
+        self._index["runs"].append(run_meta)
+
+        if country_lower not in self._index["by_country"]:
+            self._index["by_country"][country_lower] = []
+        self._index["by_country"][country_lower].append(research.id)
+
+        self._index["latest_by_country"][country_lower] = research.id
+
+        self._save_index()
+        print(f"💾 Saved research run: {research.id}")
+        return research.id
+
+    def get(self, research_id: str) -> Optional[StoredResearch]:
+        """Alias for get_research."""
+        return self.get_research(research_id)
+
+    def list(self, country: Optional[str] = None, limit: int = 20) -> List[StoredResearch]:
+        """
+        List research runs with optional country filter.
+
+        Args:
+            country: Optional country name to filter by
+            limit: Maximum number of results
+
+        Returns:
+            List of StoredResearch objects
+        """
+        if country:
+            research_ids = self._index["by_country"].get(country.lower(), [])
+            results = []
+            for rid in research_ids[-limit:]:
+                research = self.get_research(rid)
+                if research:
+                    results.append(research)
+            return results
+        else:
+            # Get most recent runs across all countries
+            recent = self.list_recent_runs(limit)
+            results = []
+            for run_meta in recent:
+                research = self.get_research(run_meta["id"])
+                if research:
+                    results.append(research)
+            return results
 
     def delete_research(self, research_id: str) -> bool:
         """Delete a research run."""
