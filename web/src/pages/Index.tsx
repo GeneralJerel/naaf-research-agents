@@ -1,6 +1,6 @@
 import FrameworkDescription from "@/components/FrameworkDescription";
 import CountryRanking from "@/components/CountryRanking";
-import CreateReportDialog from "@/components/CreateReportDialog";
+import CreateReportDialogLive from "@/components/CreateReportDialogLive";
 
 const Index = () => {
   return (
@@ -27,7 +27,7 @@ const Index = () => {
               <span className="text-border">·</span>
               <span>2023–2025</span>
             </div>
-            <CreateReportDialog />
+            <CreateReportDialogLive />
           </div>
         </header>
 
