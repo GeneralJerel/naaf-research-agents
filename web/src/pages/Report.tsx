@@ -6,6 +6,8 @@ import { usaReport } from "@/data/usaReport";
 import { chinaReport } from "@/data/chinaReport";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, TrendingUp, TrendingDown, Minus } from "lucide-react";
+import LiveNews from "@/components/LiveNews";
+import { useLiveNews } from "@/hooks/useLiveNews";
 
 const hardcodedReports: Record<string, ResearchResult> = {
   "united states": usaReport,
@@ -80,6 +82,17 @@ const Report = () => {
   const { countryName } = useParams();
   const navigate = useNavigate();
   const [report, setReport] = useState<ResearchResult | null>(null);
+  const [newsEnabled, setNewsEnabled] = useState(false);
+
+  // Live news hook - uses You.com Live News API
+  const {
+    articles,
+    isLoading: newsLoading,
+    error: newsError,
+    lastUpdated: newsLastUpdated,
+    queryType,
+    refresh: refreshNews,
+  } = useLiveNews(countryName ?? "", newsEnabled);
 
   useEffect(() => {
     const key = (countryName ?? "").toLowerCase();
@@ -187,6 +200,20 @@ const Report = () => {
               </div>
             );
           })}
+        </div>
+
+        {/* Live News Section */}
+        <div className="mb-8 rounded-xl border border-border bg-card p-5 shadow-sm">
+          <LiveNews
+            enabled={newsEnabled}
+            onToggle={setNewsEnabled}
+            articles={articles}
+            isLoading={newsLoading}
+            error={newsError}
+            lastUpdated={newsLastUpdated}
+            queryType={queryType}
+            onRefresh={refreshNews}
+          />
         </div>
 
         {/* Layer details */}
