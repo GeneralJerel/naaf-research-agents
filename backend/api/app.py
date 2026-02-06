@@ -16,16 +16,20 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
 from ..agents.naaf_agent import (
-    create_naaf_agent,
+    NAAFAgent,
     NAAFAgentConfig,
+    create_naaf_agent,
+    assess_country as agent_assess_country,
     get_all_layers_summary,
 )
 from ..framework import (
     NAAF_LAYERS,
     POWER_TIERS,
+    StoredResearch,
     ResearchStore,
     get_store,
     get_tier,
+    get_tier_description,
 )
 
 
@@ -71,7 +75,7 @@ def create_app() -> FastAPI:
     """Create and configure the FastAPI application."""
     app = FastAPI(
         title="NAAF Research Agents API",
-        description="National AI Assessment Framework - Country Research API powered by Google ADK",
+        description="National AI Assessment Framework - Country Research API",
         version="0.1.0",
         docs_url="/docs",
         redoc_url="/redoc",
@@ -98,11 +102,12 @@ async def root():
     return {
         "name": "NAAF Research Agents API",
         "version": "0.1.0",
-        "framework": "Google ADK",
+        "description": "National AI Assessment Framework - 8-Layer Country Research",
         "endpoints": {
             "research": "/naaf/research",
             "stream": "/naaf/research/stream",
             "layers": "/naaf/layers",
+            "tiers": "/naaf/tiers",
             "runs": "/naaf/runs",
             "health": "/health",
         }
@@ -116,6 +121,11 @@ async def health():
         "status": "healthy",
         "timestamp": datetime.now().isoformat(),
         "version": "0.1.0",
+        "tools": {
+            "youcom": bool(os.getenv("YOUCOM_API_KEY")),
+            "exa": bool(os.getenv("EXA_API_KEY")),
+            "gemini": bool(os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")),
+        }
     }
 
 
@@ -173,7 +183,7 @@ async def list_runs(
                 "country": r.country,
                 "overall_score": r.overall_score,
                 "tier": r.tier,
-                "created_at": r.created_at,
+                "created_at": r.created_at or r.generated_at,
             }
             for r in runs
         ],
@@ -188,7 +198,22 @@ async def get_run(run_id: str):
     run = store.get(run_id)
     if not run:
         raise HTTPException(status_code=404, detail=f"Run {run_id} not found")
-    return run.__dict__
+
+    # Convert dataclass to dict safely
+    return {
+        "id": run.id,
+        "country": run.country,
+        "country_code": run.country_code,
+        "year": run.year,
+        "overall_score": run.overall_score,
+        "tier": run.tier,
+        "layers": run.layers,
+        "sources": run.sources,
+        "news_snapshot": run.news_snapshot,
+        "framework_version": run.framework_version,
+        "generated_at": run.generated_at,
+        "research_duration_seconds": run.research_duration_seconds,
+    }
 
 
 async def generate_sse_events(
@@ -217,79 +242,53 @@ async def generate_sse_events(
         # Create the agent
         agent = create_naaf_agent(config)
 
-        # Research each layer
-        layer_scores = {}
-        all_sources = []
+        # Use callback to emit SSE events
+        events_queue = asyncio.Queue()
 
-        for layer_num, layer in NAAF_LAYERS.items():
-            yield format_sse("layer_start", {
-                "layer_number": layer_num,
-                "layer_name": layer.name,
-                "weight": layer.weight,
-                "message": f"Researching Layer {layer_num}: {layer.name}",
-            })
+        def progress_callback(event: str, data: Dict):
+            events_queue.put_nowait((event, data))
 
-            # Simulate research progress (in production, this would use agent.stream())
-            await asyncio.sleep(0.5)  # Simulated delay
-
-            # For now, generate placeholder scores
-            # In production, this would use the actual agent response
-            score = layer.max_points * 0.6  # Placeholder
-
-            layer_scores[layer_num] = {
-                "score": score,
-                "max_score": layer.max_points,
-                "status": "complete"
-            }
-
-            yield format_sse("layer_complete", {
-                "layer_number": layer_num,
-                "layer_name": layer.name,
-                "score": score,
-                "max_score": layer.max_points,
-                "weight": layer.weight,
-            })
-
-        # Calculate overall score
-        overall_score = sum(layer_scores[n]["score"] for n in layer_scores)
-        tier = get_tier(overall_score)
-
-        # Get live news if enabled
-        if config.include_news:
-            yield format_sse("news_start", {
-                "message": f"Fetching live news for {country}",
-            })
-            await asyncio.sleep(0.3)
-            yield format_sse("news_complete", {
-                "count": 5,
-                "message": "News articles retrieved",
-            })
-
-        # Save the run
-        store = get_store()
-        from ..framework import StoredResearch
-
-        stored = StoredResearch(
-            id=run_id,
-            country=country,
-            country_code="",
-            year=year,
-            overall_score=overall_score,
-            tier=tier,
-            layer_scores=layer_scores,
-            sources=all_sources,
-            created_at=datetime.now().isoformat(),
-            raw_response="",
+        # Start assessment in background
+        assessment_task = asyncio.create_task(
+            agent.assess_country(country, year, progress_callback)
         )
-        store.save(stored)
+
+        # Emit events as they come
+        layer_scores = {}
+        while not assessment_task.done():
+            try:
+                event, data = await asyncio.wait_for(events_queue.get(), timeout=0.5)
+                yield format_sse(event, data)
+
+                # Track layer scores
+                if event == "layer_complete":
+                    layer_scores[data["layer_number"]] = {
+                        "score": data["score"],
+                        "max_score": data["max_score"],
+                        "status": "complete"
+                    }
+            except asyncio.TimeoutError:
+                continue
+
+        # Get the result
+        result = await assessment_task
+
+        # Drain any remaining events
+        while not events_queue.empty():
+            event, data = events_queue.get_nowait()
+            yield format_sse(event, data)
+
+        # Save the result
+        run_id = agent.save_result(result)
 
         # Complete event
         yield format_sse("complete", {
             "run_id": run_id,
-            "country": country,
-            "year": year,
-            "overall_score": round(overall_score, 2),
-            "tier": tier,
+            "country": result.country,
+            "year": result.year,
+            "overall_score": result.overall_score,
+            "tier": result.tier,
+            "tier_description": result.tier_description,
             "layer_count": 8,
             "message": f"Assessment complete for {country}",
             "timestamp": datetime.now().isoformat(),
@@ -313,6 +312,7 @@ async def stream_research(request: NAAFResearchRequest):
     config = NAAFAgentConfig(
         include_news=request.include_news,
         check_rubric_updates=request.check_rubric_updates,
+        verbose=False,  # Disable console output for streaming
     )
 
     return StreamingResponse(
@@ -338,42 +338,38 @@ async def research(request: NAAFResearchRequest):
         check_rubric_updates=request.check_rubric_updates,
     )
 
-    # For now, return a placeholder response
-    # In production, this would run the full agent
-    run_id = f"naaf_{request.country.lower().replace(' ', '_')}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
-
-    layer_scores = []
-    total_score = 0
-
-    for layer_num, layer in NAAF_LAYERS.items():
-        score = layer.max_points * 0.6  # Placeholder
-        total_score += score
-        layer_scores.append(LayerScore(
-            layer_number=layer_num,
-            layer_name=layer.name,
-            score=score,
-            max_score=layer.max_points,
-            weight=layer.weight,
-            status="complete"
-        ))
-
-    tier = get_tier(total_score)
-    tier_desc = ""
-    for tier_name, (min_s, max_s, desc) in POWER_TIERS.items():
-        if tier_name == tier:
-            tier_desc = desc
-            break
-
-    return NAAFReportResponse(
+    # Run the actual agent
+    result = await agent_assess_country(
         country=request.country,
         year=request.year,
-        overall_score=round(total_score, 2),
-        tier=tier,
-        tier_description=tier_desc,
+        config=config,
+        save=True
+    )
+
+    # Build layer scores list
+    layer_scores = []
+    for layer_num_str, layer_data in result["layers"].items():
+        layer_num = int(layer_num_str)
+        layer = NAAF_LAYERS[layer_num]
+        layer_scores.append(LayerScore(
+            layer_number=layer_num,
+            layer_name=layer_data["name"],
+            score=layer_data["score"],
+            max_score=layer_data["max_score"],
+            weight=layer.weight,
+            status=layer_data["status"]
+        ))
+
+    return NAAFReportResponse(
+        country=result["country"],
+        year=result["year"],
+        overall_score=result["overall_score"],
+        tier=result["tier"],
+        tier_description=result["tier_description"],
         layers=layer_scores,
         sources=[],
-        generated_at=datetime.now().isoformat(),
-        run_id=run_id,
+        generated_at=result["generated_at"],
+        run_id=result["run_id"] or "",
     )
 
 
