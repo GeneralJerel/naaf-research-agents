@@ -6,26 +6,50 @@ Google Agent Development Kit (ADK).
 
 from typing import Optional, List, Dict, Any
 
-from ...tools import (
-    youcom_search as youcom_search_fn,
-    youcom_search_with_domains,
-    naaf_layer_search as naaf_layer_search_fn,
-    NAAF_SOURCE_REGISTRY,
-    fetch_live_news,
-    NewsArticle,
-    exa_search,
-    search_date_range,
-    search_naaf_layer,
-    monitor_rubric_sources,
-    results_to_dict,
-    ExaSearchResult,
-)
-from ...framework import (
-    NAAF_LAYERS,
-    calculate_layer_score,
-    calculate_overall_score,
-    get_tier,
-)
+try:
+    # Try relative imports first (when installed as package)
+    from ...tools import (
+        youcom_search as youcom_search_fn,
+        youcom_search_with_domains,
+        naaf_layer_search as naaf_layer_search_fn,
+        NAAF_SOURCE_REGISTRY,
+        fetch_live_news,
+        NewsArticle,
+        exa_search,
+        search_date_range,
+        search_naaf_layer,
+        monitor_rubric_sources,
+        results_to_dict,
+        ExaSearchResult,
+    )
+    from ...framework import (
+        NAAF_LAYERS,
+        calculate_layer_score,
+        calculate_overall_score,
+        get_tier,
+    )
+except ImportError:
+    # Fall back to absolute imports (when running from backend dir)
+    from tools import (
+        youcom_search as youcom_search_fn,
+        youcom_search_with_domains,
+        naaf_layer_search as naaf_layer_search_fn,
+        NAAF_SOURCE_REGISTRY,
+        fetch_live_news,
+        NewsArticle,
+        exa_search,
+        search_date_range,
+        search_naaf_layer,
+        monitor_rubric_sources,
+        results_to_dict,
+        ExaSearchResult,
+    )
+    from framework import (
+        NAAF_LAYERS,
+        calculate_layer_score,
+        calculate_overall_score,
+        get_tier,
+    )
 
 
 def search_layer_info(

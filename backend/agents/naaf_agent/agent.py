@@ -30,14 +30,27 @@ from .tools import (
     get_layer_info,
     get_all_layers_summary,
 )
-from ...framework import (
-    NAAF_LAYERS,
-    POWER_TIERS,
-    get_tier,
-    get_tier_description,
-    StoredResearch,
-    get_store,
-)
+
+try:
+    # Try relative imports first (when installed as package)
+    from ...framework import (
+        NAAF_LAYERS,
+        POWER_TIERS,
+        get_tier,
+        get_tier_description,
+        StoredResearch,
+        get_store,
+    )
+except ImportError:
+    # Fall back to absolute imports (when running from backend dir)
+    from framework import (
+        NAAF_LAYERS,
+        POWER_TIERS,
+        get_tier,
+        get_tier_description,
+        StoredResearch,
+        get_store,
+    )
 
 
 @dataclass

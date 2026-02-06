@@ -15,22 +15,42 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
-from ..agents.naaf_agent import (
-    NAAFAgent,
-    NAAFAgentConfig,
-    create_naaf_agent,
-    assess_country as agent_assess_country,
-    get_all_layers_summary,
-)
-from ..framework import (
-    NAAF_LAYERS,
-    POWER_TIERS,
-    StoredResearch,
-    ResearchStore,
-    get_store,
-    get_tier,
-    get_tier_description,
-)
+try:
+    # Try relative imports first (when installed as package)
+    from ..agents.naaf_agent import (
+        NAAFAgent,
+        NAAFAgentConfig,
+        create_naaf_agent,
+        assess_country as agent_assess_country,
+        get_all_layers_summary,
+    )
+    from ..framework import (
+        NAAF_LAYERS,
+        POWER_TIERS,
+        StoredResearch,
+        ResearchStore,
+        get_store,
+        get_tier,
+        get_tier_description,
+    )
+except ImportError:
+    # Fall back to absolute imports (when running from backend dir)
+    from agents.naaf_agent import (
+        NAAFAgent,
+        NAAFAgentConfig,
+        create_naaf_agent,
+        assess_country as agent_assess_country,
+        get_all_layers_summary,
+    )
+    from framework import (
+        NAAF_LAYERS,
+        POWER_TIERS,
+        StoredResearch,
+        ResearchStore,
+        get_store,
+        get_tier,
+        get_tier_description,
+    )
 
 
 # Request/Response models
