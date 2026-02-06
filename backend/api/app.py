@@ -142,7 +142,7 @@ async def health():
         "timestamp": datetime.now().isoformat(),
         "version": "0.1.0",
         "tools": {
-            "youcom": bool(os.getenv("YOUCOM_API_KEY")),
+            "youcom": bool(os.getenv("YOUCOM_API_KEY") or os.getenv("YDC_API_KEY")),
             "exa": bool(os.getenv("EXA_API_KEY")),
             "gemini": bool(os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")),
         }
