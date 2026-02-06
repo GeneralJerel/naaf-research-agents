@@ -8,14 +8,23 @@
       "overall_score": 70.0,
       "tier": "Tier 2: Strategic Specialist",
       "generated_at": "2026-02-06T23:19:29.315086"
+    },
+    {
+      "id": "naaf_singapore_20260206_231944",
+      "country": "Singapore",
+      "year": 2024,
+      "overall_score": 70.0,
+      "tier": "Tier 2: Strategic Specialist",
+      "generated_at": "2026-02-06T23:19:44.845309"
     }
   ],
   "by_country": {
     "singapore": [
-      "naaf_singapore_20260206_231929"
+      "naaf_singapore_20260206_231929",
+      "naaf_singapore_20260206_231944"
     ]
   },
   "latest_by_country": {
-    "singapore": "naaf_singapore_20260206_231929"
+    "singapore": "naaf_singapore_20260206_231944"
   }
 }
