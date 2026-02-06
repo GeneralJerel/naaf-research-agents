@@ -5,7 +5,6 @@ Google Agent Development Kit (ADK).
 """
 
 from typing import Optional, List, Dict, Any
-from google.adk import Tool
 
 from ...tools import (
     youcom_search as youcom_search_fn,
