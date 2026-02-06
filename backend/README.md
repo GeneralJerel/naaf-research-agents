@@ -18,8 +18,8 @@ export GOOGLE_API_KEY=your-google-api-key  # optional
 python run.py
 ```
 
-API available at: http://localhost:8000
-Docs at: http://localhost:8000/docs
+- **Web UI**: http://localhost:8000/ui
+- **API Docs**: http://localhost:8000/docs
 
 ### Run a Single Assessment
 
@@ -61,6 +61,7 @@ gcloud run deploy naaf-api \
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
+| `/ui` | GET | **Built-in Web UI** |
 | `/health` | GET | Health check |
 | `/naaf/layers` | GET | Get 8-layer framework definition |
 | `/naaf/tiers` | GET | Get power tier definitions |
