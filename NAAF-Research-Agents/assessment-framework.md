@@ -110,18 +110,31 @@ Score = (Country Value / Global Leader Value) × Weight
 ## Detailed Scoring Rubric (Total: 100 Points)
 
 ### Layer 1: Power & Electricity (20 Points)
-**Metric A: Industrial Capacity (10 pts)**  
-Formula: (Country Generation TWh / Global Max TWh) × 10
+**Metric A: Industrial Capacity (8 pts)**
+Formula: (Country Generation TWh / Global Max TWh) × 8
 
-**Metric B: Cost Efficiency (5 pts)**  
-Formula: (Global Min Price / Country Industrial Price) × 5  
+**Metric B: Cost Efficiency (4 pts)**
+Formula: (Global Min Price / Country Industrial Price) × 4
 Note: Inverted because lower price is better.
 
-**Metric C: Grid Reliability & Clean Mix (5 pts)**  
+**Metric C: Grid Reliability & Clean Mix (4 pts)**
 Scoring:
-- 5 pts: >50% Clean Mix AND <1 hr annual outage.
-- 3 pts: Mixed grid, occasional instability.
+- 4 pts: >50% Clean Mix AND <1 hr annual outage.
+- 2.5 pts: Mixed grid, occasional instability.
 - 1 pt: Fossil-heavy, frequent instability.
+
+**Metric D: National Output Percentile (4 pts)**
+Formula: Percentile rank of country's total electricity generation (TWh) among all nations × 4
+Calculation:
+- Rank all countries by annual electricity generation (TWh)
+- Percentile = (Number of countries below / Total countries) × 100
+- Score = (Percentile / 100) × 4
+
+Example: If a country ranks 10th out of 200 countries:
+- Percentile = (190 / 200) × 100 = 95th percentile
+- Score = 0.95 × 4 = 3.8 pts
+
+Note: This metric rewards absolute national output scale, complementing Metric A which compares against the global maximum. A country can score well here by being in the top tier of global producers even if not #1.
 
 ### Layer 2: Chipset Manufacturers (15 Points)
 **Metric A: Fabrication Capacity (10 pts)**  
