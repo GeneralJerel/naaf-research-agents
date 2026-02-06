@@ -1,4 +1,4 @@
-.PHONY: run install clean check help
+.PHONY: run run-adk install clean check help
 
 # Default target
 help:
@@ -47,6 +47,14 @@ run: check
 		uv run python run.py; \
 	else \
 		python run.py; \
+	fi
+
+# Run multi-agent ADK server
+run-adk: check
+	@if command -v uv >/dev/null 2>&1; then \
+		uv run python run_adk.py; \
+	else \
+		python run_adk.py; \
 	fi
 
 # Clean cached files
