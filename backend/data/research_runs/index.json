@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "runs": [
+    {
+      "id": "naaf_singapore_20260206_231929",
+      "country": "Singapore",
+      "year": 2024,
+      "overall_score": 70.0,
+      "tier": "Tier 2: Strategic Specialist",
+      "generated_at": "2026-02-06T23:19:29.315086"
+    }
+  ],
+  "by_country": {
+    "singapore": [
+      "naaf_singapore_20260206_231929"
+    ]
+  },
+  "latest_by_country": {
+    "singapore": "naaf_singapore_20260206_231929"
+  }
+}
