@@ -176,3 +176,156 @@ export async function checkHealth(): Promise<{
   }
   return response.json();
 }
+
+// =============================================================================
+// Stored Research API - For demo mode and history
+// =============================================================================
+
+export interface StoredResearch {
+  id: string;
+  country: string;
+  country_code: string;
+  year: number;
+  overall_score: number;
+  tier: string;
+  layers: Record<string, NAAFLayerResult>;
+  sources: string[];
+  news_snapshot: {
+    title: string;
+    description: string;
+    url: string;
+    source: string;
+    timestamp: string;
+  }[];
+  framework_version: string;
+  generated_at: string;
+  research_duration_seconds: number;
+}
+
+export interface StoredCountry {
+  country: string;
+  country_code: string;
+  latest_score: number;
+  tier: string;
+  last_updated: string;
+  run_count: number;
+}
+
+/**
+ * List all stored research runs.
+ */
+export async function listStoredResearch(): Promise<{
+  countries: StoredCountry[];
+  recent_runs: {
+    id: string;
+    country: string;
+    year: number;
+    overall_score: number;
+    tier: string;
+    generated_at: string;
+  }[];
+}> {
+  const response = await fetch(`${API_BASE_URL}/naaf/stored`);
+  if (!response.ok) {
+    throw new Error(`Failed to list stored research: ${response.statusText}`);
+  }
+  return response.json();
+}
+
+/**
+ * Get stored research for a country.
+ */
+export async function getStoredResearch(
+  country: string,
+  runId?: string
+): Promise<StoredResearch> {
+  const url = runId
+    ? `${API_BASE_URL}/naaf/stored/${encodeURIComponent(country)}?run_id=${runId}`
+    : `${API_BASE_URL}/naaf/stored/${encodeURIComponent(country)}`;
+
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to get stored research: ${response.statusText}`);
+  }
+  return response.json();
+}
+
+/**
+ * Get research history for a country.
+ */
+export async function getCountryHistory(country: string): Promise<{
+  country: string;
+  run_count: number;
+  runs: {
+    id: string;
+    year: number;
+    overall_score: number;
+    tier: string;
+    generated_at: string;
+    framework_version: string;
+  }[];
+}> {
+  const response = await fetch(
+    `${API_BASE_URL}/naaf/stored/${encodeURIComponent(country)}/history`
+  );
+  if (!response.ok) {
+    throw new Error(`Failed to get country history: ${response.statusText}`);
+  }
+  return response.json();
+}
+
+/**
+ * Start NAAF research with optional stored data fallback.
+ * If useStored is true and stored data exists, returns that instead of running live.
+ */
+export async function* researchCountryWithFallback(
+  country: string,
+  year: number = 2024,
+  useStored: boolean = false
+): AsyncGenerator<NAAFResearchEvent> {
+  const url = new URL(`${API_BASE_URL}/naaf/research`);
+  if (useStored) {
+    url.searchParams.set("use_stored", "true");
+  }
+
+  const response = await fetch(url.toString(), {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ country, year }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Research request failed: ${response.statusText}`);
+  }
+
+  const reader = response.body?.getReader();
+  if (!reader) {
+    throw new Error("No response body");
+  }
+
+  const decoder = new TextDecoder();
+  let buffer = "";
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+
+    buffer += decoder.decode(value, { stream: true });
+
+    const lines = buffer.split("\n");
+    buffer = lines.pop() || "";
+
+    for (const line of lines) {
+      if (line.startsWith("data: ")) {
+        try {
+          const data = JSON.parse(line.slice(6));
+          yield data as NAAFResearchEvent;
+        } catch (e) {
+          console.warn("Failed to parse SSE event:", line);
+        }
+      }
+    }
+  }
+}
