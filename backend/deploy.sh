@@ -70,8 +70,7 @@ check_secret() {
     fi
 }
 
-check_secret "naaf-youcom-api-key"
-check_secret "naaf-exa-api-key"
+check_secret "naaf-ydc-api-key"
 check_secret "naaf-google-api-key"
 
 if [ "$SECRETS_OK" = false ]; then
@@ -102,7 +101,7 @@ gcloud run deploy "$SERVICE_NAME" \
     --timeout "$TIMEOUT" \
     --concurrency "$CONCURRENCY" \
     --set-env-vars "NAAF_STORAGE_DIR=/app/data/research_runs" \
-    --set-secrets "YOUCOM_API_KEY=naaf-youcom-api-key:latest,EXA_API_KEY=naaf-exa-api-key:latest,GOOGLE_API_KEY=naaf-google-api-key:latest"
+    --set-secrets "YDC_API_KEY=naaf-ydc-api-key:latest,GOOGLE_API_KEY=naaf-google-api-key:latest"
 
 echo ""
 echo "✅ Deployment complete!"

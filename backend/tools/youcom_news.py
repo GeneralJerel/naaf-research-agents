@@ -59,9 +59,9 @@ def fetch_live_news(
     Returns:
         List of NewsArticle objects
     """
-    api_key = os.getenv("YOUCOM_API_KEY")
+    api_key = os.getenv("YOUCOM_API_KEY") or os.getenv("YDC_API_KEY")
     if not api_key:
-        raise Exception("YOUCOM_API_KEY not configured")
+        raise Exception("YOUCOM_API_KEY or YDC_API_KEY not configured")
 
     # Select query based on rotation index
     query_template = NEWS_QUERY_TEMPLATES[query_index % len(NEWS_QUERY_TEMPLATES)]

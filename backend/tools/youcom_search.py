@@ -30,10 +30,10 @@ def _try_youcom_search(
     Returns:
         List of search result dictionaries with title, link, snippet, source
     """
-    api_key = os.getenv("YOUCOM_API_KEY")
+    api_key = os.getenv("YOUCOM_API_KEY") or os.getenv("YDC_API_KEY")
 
     if not api_key:
-        raise Exception("You.com API key not configured. Set YOUCOM_API_KEY environment variable.")
+        raise Exception("You.com API key not configured. Set YOUCOM_API_KEY or YDC_API_KEY environment variable.")
 
     # Build the query with site filters if provided
     search_query = query
