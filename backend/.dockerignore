@@ -1,0 +1,47 @@
+# Docker ignore for faster builds
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+tests/
+
+# Local data
+data/
+
+# Git
+.git/
+.gitignore
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Docs
+docs/
+*.md
+!README.md
