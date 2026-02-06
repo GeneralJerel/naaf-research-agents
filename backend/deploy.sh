@@ -76,9 +76,10 @@ check_secret "naaf-google-api-key"
 if [ "$SECRETS_OK" = false ]; then
     echo ""
     echo "⚠️  Some secrets are missing. Create them with:"
-    echo "   gcloud secrets create naaf-youcom-api-key --data-file=-"
-    echo "   gcloud secrets create naaf-exa-api-key --data-file=-"
-    echo "   gcloud secrets create naaf-google-api-key --data-file=-"
+    echo "   echo -n 'your-key' | gcloud secrets create naaf-ydc-api-key --data-file=-"
+    echo "   echo -n 'your-key' | gcloud secrets create naaf-google-api-key --data-file=-"
+    echo ""
+    echo "   Note: Only naaf-ydc-api-key is required. Google API key is optional."
     echo ""
     read -p "Continue anyway? (y/N) " -n 1 -r
     echo

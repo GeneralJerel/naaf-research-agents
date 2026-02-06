@@ -83,11 +83,12 @@ curl -X POST http://localhost:8000/naaf/research \
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `YDC_API_KEY` | Yes | You.com Search API key |
-| `GOOGLE_API_KEY` | No | Google Gemini API key |
-| `EXA_API_KEY` | No | Exa AI search key |
+| `YDC_API_KEY` | **Yes** | You.com Search API key ($100 credit) |
+| `GOOGLE_API_KEY` | No | Google Gemini API key (optional) |
+| `EXA_API_KEY` | No | Exa AI search key (optional, adds date filtering) |
 | `PORT` | No | Server port (default: 8000) |
-| `NAAF_STORAGE_DIR` | No | Research storage path |
+
+**Minimum setup**: Just `YDC_API_KEY` is needed to run assessments.
 
 ---
 
