@@ -1,13 +1,13 @@
 # Integration Status
 
-## Last Updated: 2026-02-06 21:30 UTC
+## Last Updated: 2026-02-06 21:35 UTC
 
 ## Sponsor Tool Status
 
 | Tool | Status | Location | Notes |
 |------|--------|----------|-------|
 | **Strands Agents SDK** | ✅ Ready | strands-deepsearch-agent/backend | Using existing integration |
-| **You.com Search API** | ✅ Implemented | strands-deepsearch-agent/backend/src/agent/tools/youcom_search.py | Needs API key |
+| **You.com Search API** | ✅ Implemented | strands-deepsearch-agent/backend/src/agent/tools/youcom_search.py | Primary search provider |
 | **Composio** | 🔴 Not Started | - | Need to add export tools |
 | **Render** | 🔴 Not Started | - | Deployment pending |
 
@@ -24,6 +24,20 @@
    - Power tier classification
    - Query generation for country research
 
+3. **07afc1c** - Wire You.com as primary search provider
+   - Added `_try_youcom_search` to enhanced_search.py
+   - You.com is first in search methods list
+
+4. **c220efd** - Add NAAF research agent with 8-layer orchestration
+   - `naaf_research_agent.py`: Full orchestration class
+   - Layer agents, scoring agent, report agent
+   - Async streaming for progress updates
+
+5. **5f26061** - Add NAAF API endpoints for country research
+   - `POST /naaf/research`: Stream country assessment
+   - `GET /naaf/layers`: Layer definitions
+   - `GET /naaf/tiers`: Power tier definitions
+
 ## Environment Variables Needed
 
 ```bash
@@ -39,42 +53,45 @@ AWS_DEFAULT_REGION=us-east-1
 COMPOSIO_API_KEY=your_key_here
 ```
 
+## Completed Steps
+
+- [x] Clone strands-deepsearch-agent
+- [x] Add You.com Search API integration
+- [x] Add NAAF 8-layer framework module
+- [x] Wire You.com into enhanced_search.py as primary provider
+- [x] Create NAAF research agent with layer orchestration
+- [x] Add FastAPI endpoints for NAAF research
+
 ## Next Steps
 
-1. **Wire You.com into enhanced_search.py**
-   - Add `_try_youcom_search` to the search methods list
-   - Make it the primary search provider
-
-2. **Adapt research_agent.py for NAAF**
-   - Import naaf_framework
-   - Modify `research_stream()` to loop through 8 layers
-   - Generate layer-specific queries using `generate_layer_queries()`
-
-3. **Add Composio export tools**
+1. **Add Composio export tools**
    - Google Sheets export
    - Slack posting
 
-4. **Connect UI to API**
-   - Wire CreateReportDialog to POST /research
-   - Poll GET /research/{id} for progress
+2. **Connect UI to API**
+   - Wire CreateReportDialog to POST /naaf/research
+   - Handle SSE streaming for progress
    - Update CountryRanking with real data
 
-## API Endpoints (Planned)
+3. **Deploy to Render**
+   - Configure environment variables
+   - Deploy API service
+
+## API Endpoints (Implemented)
 
 ```
-POST /research
-  Body: { "country": "Brazil", "years": [2024] }
-  Response: { "run_id": "uuid" }
+POST /naaf/research
+  Body: { "country": "Brazil", "year": 2024 }
+  Response: SSE stream with progress updates and final report
 
-GET /research/{run_id}
-  Response: { "status": "running", "progress": 45, "current_layer": 3, ... }
+GET /naaf/layers
+  Response: { "total_layers": 8, "layers": [...] }
 
-GET /research/{run_id}/report
-  Response: { "country": "Brazil", "overall_score": 52.3, "layers": {...}, ... }
+GET /naaf/tiers
+  Response: { "tiers": [...] }
 
-POST /research/{run_id}/export
-  Body: { "destination": "google_sheets" }
-  Response: { "sheet_url": "https://..." }
+GET /health
+  Response: { "status": "healthy", "timestamp": "..." }
 ```
 
 ## Testing
@@ -84,6 +101,14 @@ POST /research/{run_id}/export
 cd strands-deepsearch-agent/backend
 ./run_backend.sh
 
-# Test You.com search (manual)
-python -c "from src.agent.tools.youcom_search import youcom_search; print(youcom_search('Brazil electricity generation 2024'))"
+# Test NAAF research (curl)
+curl -X POST http://localhost:8001/naaf/research \
+  -H "Content-Type: application/json" \
+  -d '{"country": "Brazil", "year": 2024}'
+
+# Get layer definitions
+curl http://localhost:8001/naaf/layers
+
+# Get tier definitions
+curl http://localhost:8001/naaf/tiers
 ```
