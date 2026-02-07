@@ -1,0 +1,65 @@
+{
+  "id": "naaf_singapore_20260206_231944",
+  "country": "Singapore",
+  "country_code": "",
+  "year": 2024,
+  "overall_score": 70.0,
+  "tier": "Tier 2: Strategic Specialist",
+  "layers": {
+    "1": {
+      "score": 14.0,
+      "max_score": 20.0,
+      "status": "complete",
+      "findings": "### Industrial Capacity\nNAAF layer search failed: 403 Client Error: Forbidden for url: https://api.ydc-index.io/search?query=Singapore+Industrial+Capacity+2024+%28site%3Aiea.org+OR+site%3Aworldbank.org+OR+site%3Aglobalpetrolprices.com+OR+site%3Aoecd.org+OR+site%3Aeia.gov+OR+site%3Airena.org%29&num_web_results=8\n\n### Cost Efficiency\nNAAF layer search failed: 403 Client Error: Forbidden for url: https://api.ydc-index.io/search?query=Singapore+Cost+Efficiency+2024+%28site%3Aiea.org+OR+site%3Aworldbank.org+OR+site%3Aglobalpetrolprices.com+OR+site%3Aoecd.org+OR+site%3Aeia.gov+OR+site%3Airena.org%29&num_web_results=8\n\n### Grid Reliability & Clean Mix\nNAAF layer search failed: 403 Client Error: Forbidden for url: https://api.ydc-index.io/search?query=Singapore+Grid+Reliability+%26+Clean+Mix+2024+%28site%3Aiea.org+OR+site%3Aworldbank.org+OR+site%3Aglobalpetrolprices.com+OR+site%3Aoecd.org+OR+site%3Aeia.gov+OR+site%3Airena.org%29&num_web_results=8\n\n### National Output Percentile\nNAAF layer sear"
+    },
+    "2": {
+      "score": 10.5,
+      "max_score": 15.0,
+      "status": "complete",
+      "findings": "### Fabrication Capacity\nNAAF layer search failed: 403 Client Error: Forbidden for url: https://api.ydc-index.io/search?query=Singapore+Fabrication+Capacity+2024+%28site%3Asemi.org+OR+site%3Achips.gov+OR+site%3Aoecd.org+OR+site%3Aasml.com+OR+site%3Atsmc.com+OR+site%3Aintel.com%29&num_web_results=8\n\n### Equipment & Supply Chain Control\nNAAF layer search failed: 403 Client Error: Forbidden for url: https://api.ydc-index.io/search?query=Singapore+Equipment+%26+Supply+Chain+Control+2024+%28site%3Asemi.org+OR+site%3Achips.gov+OR+site%3Aoecd.org+OR+site%3Aasml.com+OR+site%3Atsmc.com+OR+site%3Aintel.com%29&num_web_results=8"
+    },
+    "3": {
+      "score": 10.5,
+      "max_score": 15.0,
+      "status": "complete",
+      "findings": "### Compute Density\nNAAF layer search failed: 403 Client Error: Forbidden for url: https://api.ydc-index.io/search?query=Singapore+Compute+Density+2024+%28site%3Adatacentermap.com+OR+site%3Atelegeography.com+OR+site%3Aitu.int+OR+site%3Asynergyrg.com+OR+site%3Acloudscene.com%29&num_web_results=8\n\n### Sovereign Cloud\nNAAF layer search failed: 403 Client Error: Forbidden for url: https://api.ydc-index.io/search?query=Singapore+Sovereign+Cloud+2024+%28site%3Adatacentermap.com+OR+site%3Atelegeography.com+OR+site%3Aitu.int+OR+site%3Asynergyrg.com+OR+site%3Acloudscene.com%29&num_web_results=8"
+    },
+    "4": {
+      "score": 7.0,
+      "max_score": 10.0,
+      "status": "complete",
+      "findings": "### Frontier Model Capacity\nNAAF layer search failed: 403 Client Error: Forbidden for url: https://api.ydc-index.io/search?query=Singapore+Frontier+Model+Capacity+2024+%28site%3Atop500.org+OR+site%3Awipo.int+OR+site%3Aaiindex.stanford.edu+OR+site%3Aarxiv.org+OR+site%3Agithub.com%29&num_web_results=8"
+    },
+    "5": {
+      "score": 7.0,
+      "max_score": 10.0,
+      "status": "complete",
+      "findings": "### Data Openness\nNAAF layer search failed: 403 Client Error: Forbidden for url: https://api.ydc-index.io/search?query=Singapore+Data+Openness+2024+%28site%3Aoecd.org+OR+site%3Aworldbank.org+OR+site%3Aopendatawatch.com+OR+site%3Athegovlab.org%29&num_web_results=8\n\n### Data Volume Potential\nNAAF layer search failed: 403 Client Error: Forbidden for url: https://api.ydc-index.io/search?query=Singapore+Data+Volume+Potential+2024+%28site%3Aoecd.org+OR+site%3Aworldbank.org+OR+site%3Aopendatawatch.com+OR+site%3Athegovlab.org%29&num_web_results=8"
+    },
+    "6": {
+      "score": 7.0,
+      "max_score": 10.0,
+      "status": "complete",
+      "findings": "### Capital Depth\nNAAF layer search failed: 403 Client Error: Forbidden for url: https://api.ydc-index.io/search?query=Singapore+Capital+Depth+2024+%28site%3Adealroom.co+OR+site%3Acrunchbase.com+OR+site%3Acbinsights.com+OR+site%3Apitchbook.com+OR+site%3Agithub.com%29&num_web_results=8"
+    },
+    "7": {
+      "score": 7.0,
+      "max_score": 10.0,
+      "status": "complete",
+      "findings": "### Talent Pool\nNAAF layer search failed: 403 Client Error: Forbidden for url: https://api.ydc-index.io/search?query=Singapore+Talent+Pool+2024+%28site%3Aunesco.org+OR+site%3Auis.unesco.org+OR+site%3Atopuniversities.com+OR+site%3Atimeshighereducation.com+OR+site%3Alinkedin.com%29&num_web_results=8\n\n### Research Impact\nNAAF layer search failed: 403 Client Error: Forbidden for url: https://api.ydc-index.io/search?query=Singapore+Research+Impact+2024+%28site%3Aunesco.org+OR+site%3Auis.unesco.org+OR+site%3Atopuniversities.com+OR+site%3Atimeshighereducation.com+OR+site%3Alinkedin.com%29&num_web_results=8"
+    },
+    "8": {
+      "score": 7.0,
+      "max_score": 10.0,
+      "status": "complete",
+      "findings": "### Government Readiness\nNAAF layer search failed: 403 Client Error: Forbidden for url: https://api.ydc-index.io/search?query=Singapore+Government+Readiness+2024+%28site%3Aoxfordinsights.com+OR+site%3Aeurostat.ec.europa.eu+OR+site%3Aoecd.org+OR+site%3Aworldbank.org%29&num_web_results=8"
+    }
+  },
+  "sources": [],
+  "news_snapshot": [],
+  "framework_version": "1.0",
+  "generated_at": "2026-02-06T23:19:44.845309",
+  "research_duration_seconds": 4.755425,
+  "raw_response": "",
+  "created_at": "2026-02-06T23:19:44.845309"
+}

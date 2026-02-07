@@ -1,0 +1,62 @@
+# Cloud Build configuration for NAAF Research Agents
+# Deploys the backend API to Cloud Run
+
+steps:
+  # Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/naaf-api:$COMMIT_SHA'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/naaf-api:latest'
+      - '-f'
+      - 'backend/Dockerfile'
+      - 'backend'
+
+  # Push the Docker image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/naaf-api:$COMMIT_SHA'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/naaf-api:latest'
+
+  # Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'naaf-api'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/naaf-api:$COMMIT_SHA'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--memory'
+      - '1Gi'
+      - '--cpu'
+      - '1'
+      - '--timeout'
+      - '300'
+      - '--concurrency'
+      - '80'
+      - '--set-env-vars'
+      - 'NAAF_STORAGE_DIR=/app/data/research_runs'
+      - '--set-secrets'
+      - 'GOOGLE_API_KEY=naaf-google-api-key:latest,YOUCOM_API_KEY=naaf-youcom-api-key:latest,EXA_API_KEY=naaf-exa-api-key:latest'
+
+images:
+  - 'gcr.io/$PROJECT_ID/naaf-api:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/naaf-api:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+timeout: '600s'
