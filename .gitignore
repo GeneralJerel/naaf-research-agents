@@ -19,3 +19,14 @@ pnpm-debug.log*
 
 # OS
 .DS_Store
+
+# Screen recordings & videos
+*.mov
+*.mp4
+*.avi
+*.mkv
+*.webm
+*.m4v
+
+# ADK session database
+**/.adk/

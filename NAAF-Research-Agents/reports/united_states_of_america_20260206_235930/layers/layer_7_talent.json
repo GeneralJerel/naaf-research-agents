@@ -1,0 +1,11 @@
+{
+  "layer_number": 7,
+  "layer_name": "Education & Consulting",
+  "short_name": "talent",
+  "score": 100,
+  "max_score": 100.0,
+  "weight_pct": 10.0,
+  "weighted_contribution": 10.0,
+  "justification": "The United States is the undisputed global leader in AI Talent and Education, serving as the benchmark for this layer.\n\n**Talent Pool**:\n- **PhD Production**: According to the **2024 CRA Taulbee Survey**, the US and Canada (primarily US) produced a record **2,352 PhDs** in CS, CE, and Information in the 2023-24 academic year, an 8.2% increase over the previous year's record of 2,173.\n- **Master's Production**: The National Center for Education Statistics (**NCES**) reports that over **88,000 Master's degrees** were conferred in Computer and Information Sciences in the 2021-22 cycle, with subsequent growth trends placing 2023 estimates near 100,000.\n- **Industry Migration**: The **Stanford AI Index 2024** notes that 70.7% of new AI PhDs enter industry, reflecting the high commercial demand for top-tier talent.\n\n**Research Impact**:\n- **University Rankings**: In the **QS World University Rankings by Subject 2025: Computer Science**, US institutions occupy 4 of the top 5 global positions: **MIT (#2), Stanford (#3), Carnegie Mellon (#4), and UC Berkeley (#5)**.\n- **H-Index**: The US maintains the world's highest **H-Index** in Artificial Intelligence (and overall science at ~2,880), reflecting the unparalleled citation impact of its research output.\n\n**Sources**:\n- CRA Taulbee Survey 2024: https://datavisualization.cra.org/TaulbeeSurvey/CRA_Taulbee_Survey_Report_2024.html\n- NCES Digest of Education Statistics 2023: https://nces.ed.gov/programs/coe/indicator/ctb/graduate-degree-fields\n- QS Subject Rankings 2025: https://www.topuniversities.com/university-subject-rankings/computer-science-information-systems\n- SCImago Journal & Country Rank: https://www.scimagojr.com/\n- Stanford AI Index 2024: https://hai.stanford.edu/ai-index/2024-ai-index-report/education",
+  "status": "complete"
+}

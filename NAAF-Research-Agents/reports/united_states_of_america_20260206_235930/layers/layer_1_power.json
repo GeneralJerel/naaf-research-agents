@@ -1,0 +1,11 @@
+{
+  "layer_number": 1,
+  "layer_name": "Power & Electricity",
+  "short_name": "power",
+  "score": 88,
+  "max_score": 100.0,
+  "weight_pct": 20.0,
+  "weighted_contribution": 17.6,
+  "justification": "The United States ranks #2 globally in electricity generation (approx. 4,251 TWh in 2023, including utility-scale and small-scale solar) and total installed utility capacity (1,190 GW). It is the world leader in nuclear electricity generation, which accounts for 18.6% of its mix. Total carbon-free generation (nuclear + renewables) reached 40% in 2023. However, the U.S. trails China significantly in total volume and capacity. Industrial electricity prices are moderately competitive at $0.143 - $0.149/kWh (2024/2025), which is higher than China (~$0.09/kWh) or Saudi Arabia (~$0.07/kWh) but much lower than European averages. Grid reliability is high with a routine SAIDI (outage duration) of approx. 2 hours excluding major weather events, though total SAIDI fluctuates with extreme weather (5.6 hours in 2022). \n\nData Sources:\n- EIA, 'Electricity in the US', July 2024: 4,178 TWh utility-scale gen, 1,190 GW capacity.\n- EIA, 'Electric Power Monthly', 2024: 18.6% nuclear, 21.4% renewables.\n- GlobalPetrolPrices, March 2025: Business electricity price $0.149/kWh.\n- EIA, 'Today in Energy', Jan 2024: SAIDI metrics.\n- Statista/GlobalPetrolPrices: China price comparison (~$0.09-$0.11/kWh).",
+  "status": "complete"
+}

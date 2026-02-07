@@ -1,0 +1,11 @@
+{
+  "layer_number": 3,
+  "layer_name": "Cloud & Data Centers",
+  "short_name": "cloud",
+  "score": 100,
+  "max_score": 100.0,
+  "weight_pct": 15.0,
+  "weighted_contribution": 15.0,
+  "justification": "The United States is the undisputed global leader in Layer 3 (Cloud & Data Centers). \n\n**Compute Density**: According to Synergy Research Group (2024-2025), the US accounts for **54% of total global hyperscale data center capacity**. As of Q1 2025, there are 1,189 hyperscale data centers globally, with approximately **51% (~600 facilities)** located in the United States. Northern Virginia remains the world's largest data center market, followed by other major US hubs in Oregon, Iowa, Ohio, and Dallas. Total hyperscale capacity is currently doubling every four years, driven by AI demand.\n\n**Sovereign Cloud**: The US market is characterized by total domestic dominance. US-based providers **AWS (31%), Microsoft Azure (25%), and Google Cloud (11%)** control 67% of the global market and nearly the entire US domestic market. The US possesses the world's most advanced sovereign cloud capabilities for government and defense, such as AWS GovCloud and Azure Government (FedRAMP/IL6 compliant). Foreign cloud dominance in the US is non-existent.\n\n**Data Sources**:\n- Synergy Research Group, 'Hyperscale Data Center Count Hits 1,136' (Dec 2024): https://www.srgresearch.com/articles/hyperscale-data-center-count-hits-1136-average-size-increases-us-accounts-for-54-of-total-capacity\n- Synergy Research Group, 'Q1 2025 Hyperscale Capacity' (May 2025): https://www.srgresearch.com/articles/the-worlds-total-data-center-capacity-is-shifting-rapidly-to-hyperscale-operators\n- Statista, 'Cloud Infrastructure Market Share Q1 2024': https://www.statista.com/statistics/967365/worldwide-cloud-infrastructure-services-market-share-vendor/\n- Data Center Map, US Region Profiles: https://www.datacentermap.com/usa/",
+  "status": "complete"
+}

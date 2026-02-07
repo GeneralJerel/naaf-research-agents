@@ -1,0 +1,11 @@
+{
+  "layer_number": 5,
+  "layer_name": "Platform & Data",
+  "short_name": "data",
+  "score": 85,
+  "max_score": 100.0,
+  "weight_pct": 10.0,
+  "weighted_contribution": 8.5,
+  "justification": "China is a global leader in Layer 5: Platform & Data, primarily driven by its unparalleled data volume and highly developed digital ecosystem. \n\n- **Data Volume Potential**: China has the world's largest internet population, reaching **1.125 billion users** by December 2025 (CNNIC), with an 80.1% penetration rate. This provides a massive, high-velocity training data engine for foundation models and AI applications. \n- **Statistical Performance**: China scores **75.4** on the World Bank's **Statistical Performance Index (SPI)** as of the 2024/2025 update, reflecting robust national data infrastructure and statistical capacity.\n- **Data Openness**: China's score on the **Global Data Barometer (GDB) 2022** is **34/100**, indicating lower levels of public data openness and governance transparency compared to OECD leaders (e.g., S. Korea, USA). However, its domestic 'closed-loop' data platforms (WeChat, Alipay, Douyin) aggregate vast amounts of proprietary data that empower domestic AI developers.\n- **Regulatory Environment**: The implementation of the Data Security Law and PIPL ensures high state control and data sovereignty, which centralizes national data assets for strategic AI use but limits global data integration.\n\nChina receives a score of 85, balancing its world-leading data scale with moderate open-data transparency.\n\nSources:\n- CNNIC (Internet Users 2025): http://english.scio.gov.cn/chinavoices/2025-01/19/content_117673023.html\n- World Bank SPI (2024 Update): https://data.worldbank.org/indicator/IQ.SPI.OVRL?locations=CN\n- Global Data Barometer: https://globaldatabarometer.org/country/china/\n- ODIN (Open Data Inventory): https://odin.opendatawatch.com/Report/countryProfileUpdated/CHN?year=2024",
+  "status": "complete"
+}

@@ -1,0 +1,11 @@
+{
+  "layer_number": 2,
+  "layer_name": "Chipset Manufacturers",
+  "short_name": "chips",
+  "score": 75,
+  "max_score": 100.0,
+  "weight_pct": 15.0,
+  "weighted_contribution": 11.25,
+  "justification": "Singapore is a global leader in semiconductor equipment manufacturing (producing 20% of global equipment) and advanced memory (Micron NAND), but lacks leading-edge logic fabrication (<14nm). \n\n- **Fabrication Capacity**: Logic production is centered on mature and specialty nodes. The most advanced node is **22nm** at UMC's Fab 12i (2024/25 expansion). GlobalFoundries' 2023 expansion (Fab 7H) targets 28nm-90nm. While it lacks <7nm AI logic, it is a global hub for high-end NAND memory (Micron). (Sources: TrendForce, UMC, GlobalFoundries).\n- **Equipment & Supply Chain**: Extremely high capability. Home to major manufacturing for **Applied Materials**, **Lam Research**, and **KLA**. It produces 1 in 5 of the world's semiconductor tools. (Sources: Singapore EDB, SEMI).\n- **Advanced Packaging**: Strong presence in OSAT (Amkor, JCET), which is increasingly vital for AI chiplets.\n\nScore of 75 reflects its indispensable role in the global supply chain despite the absence of sub-14nm logic fabs.",
+  "status": "complete"
+}

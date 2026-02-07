@@ -1,0 +1,11 @@
+{
+  "layer_number": 3,
+  "layer_name": "Cloud & Data Centers",
+  "short_name": "cloud",
+  "score": 88,
+  "max_score": 100.0,
+  "weight_pct": 15.0,
+  "weighted_contribution": 13.2,
+  "justification": "Singapore is a global top-3 data center hub by attractiveness and the 4th largest in APAC by hyperscale capacity (~700-800 MW operational, 300 MW+ in pipeline). While cloud services are dominated by US/Chinese hyperscalers, Singapore maintains strong 'sovereign control' through domestic giants like STT GDC and Singtel (Nxera), and sophisticated government-managed cloud frameworks (GCC). Its score is capped slightly below 90 only by physical land/power constraints that limit absolute scale compared to the US or China. (Sources: IMDA Green Data Center Roadmap 2024, Structure Research, Baxtel, Arizton).",
+  "status": "complete"
+}

@@ -1,0 +1,11 @@
+{
+  "layer_number": 6,
+  "layer_name": "Applications & Startups",
+  "short_name": "apps",
+  "score": 100,
+  "max_score": 100.0,
+  "weight_pct": 10.0,
+  "weighted_contribution": 10.0,
+  "justification": "The United States is the undisputed global leader in Layer 6 (Applications & Startups), serving as the world's primary engine for AI commercialization and venture capital. \n\n**Capital Depth (AI VC Investment)**:\n- In 2024, AI startups in the U.S. captured nearly **half of all domestic venture funding**, totaling approximately **$89 billion** (estimated from PitchBook's report that AI/ML took ~50% of the $178 billion total U.S. VC deal value). \n- This dwarfs all other regions; for comparison, the entire global AI VC market was estimated at $100B–$131.5B, meaning the U.S. accounts for roughly **60-70% of global AI investment**.\n- In 2023, global AI funding was ~$42.5B (CB Insights), with the U.S. representing the vast majority (~$30B).\n\n**AI Unicorn Count**:\n- The U.S. leads the world in AI unicorn density. In 2024 alone, the U.S. minted **25 new AI unicorns**, accounting for 41% of all new U.S. unicorns that year (Morningstar/PR Newswire).\n- Total AI unicorn count in the U.S. is estimated between **150-200**, part of a broader 656-unicorn ecosystem that is the largest globally (World Population Review, 2024). \n- Major AI leaders like OpenAI, Anthropic, xAI, and Databricks are U.S.-based, with OpenAI nearly doubling its valuation in 2024.\n\n**Sources**:\n- PitchBook, 'AI startups grabbed a third of global VC dollars in 2024': https://pitchbook.com/news/articles/ai-startups-grabbed-a-third-of-global-vc-dollars-in-2024\n- Crunchbase, 'Global venture funding reached $314B in 2024': https://news.crunchbase.com/venture/global-funding-data-analysis-ai-eoy-2024/\n- CB Insights, 'State of AI Q3’24 Report': https://www.cbinsights.com/research/report/ai-trends-q3-2024/\n- World Population Review, 'Unicorns by Country 2025': https://worldpopulationreview.com/country-rankings/unicorns-by-country\n- Hurun Global Unicorn Index 2024/2025.",
+  "status": "complete"
+}

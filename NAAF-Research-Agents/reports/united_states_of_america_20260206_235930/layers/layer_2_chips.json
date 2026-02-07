@@ -1,0 +1,11 @@
+{
+  "layer_number": 2,
+  "layer_name": "Chipset Manufacturers",
+  "short_name": "chips",
+  "score": 94,
+  "max_score": 100.0,
+  "weight_pct": 15.0,
+  "weighted_contribution": 14.1,
+  "justification": "The United States is a global powerhouse in the semiconductor ecosystem, though it trails Taiwan in advanced fabrication scale. \n\n**Fabrication Capacity**: The US has achieved domestic <5nm capability. TSMC's Arizona Fab 1 began volume production of **4nm (N4)** chips in Q4 2024. Intel is currently ramping **Intel 3 (3nm-class)** and **Intel 18A/20A (~2nm-class)** nodes in its Oregon and Arizona facilities (Intel, 2024). This places the US in the top tier (10/10) for fabrication node capability.\n\n**Equipment & Supply Chain**: The US is the undisputed leader in Semiconductor Manufacturing Equipment (SME) and Electronic Design Automation (EDA). US firms **Applied Materials, Lam Research, and KLA** comprise 3 of the top 5 global equipment vendors, dominating etching, deposition, and metrology (Statista, 2023). US EDA tools (Synopsys, Cadence) are essential for virtually all global chip design.\n\n**Vulnerabilities**: The US remains dependent on **ASML (Netherlands)** for EUV lithography equipment and faces significant supply chain risks in critical minerals. It relies heavily on imports for **Gallium and Germanium**, which were subject to Chinese export controls in 2023. The Department of Energy is countering this through the **Critical Minerals and Materials (CMM) Accelerator** (DOE, 2024). \n\n**Sources**: \n- TSMC Arizona Production: https://pr.tsmc.com/english/news/3210 (Volume production late 2024)\n- Intel Process Roadmap: https://www.intel.com/content/www/us/en/foundry/process.html (Intel 3 and 18A ramp)\n- SME Market Share: https://www.statista.com/statistics/267392/market-share-of-semiconductor-equipment-manufacturers/\n- Critical Minerals: https://www.energy.gov/eere/ammto/critical-minerals-and-materials-accelerator-0 (2024 supply chain efforts)",
+  "status": "complete"
+}

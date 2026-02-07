@@ -1,0 +1,11 @@
+{
+  "layer_number": 4,
+  "layer_name": "Model Developers",
+  "short_name": "models",
+  "score": 78,
+  "max_score": 100.0,
+  "weight_pct": 10.0,
+  "weighted_contribution": 7.8,
+  "justification": "Singapore is a global outlier in AI model development, maintaining domestic foundation models up to 70B parameters (SEA-LION v3) and high-performance supercomputing assets. \\n\\n- **Model Capacity**: The SEA-LION family (7B to 70B params) and the MERaLiON program represent a sophisticated domestic ecosystem for regional-context AI. (Sources: sea-lion.ai, IMDA).\\n- **Supercomputing**: Boasts two systems in the TOP500 list as of late 2024, with ASPIRE 2A+ ranked 90th globally (~20 PetaFLOPS). A S$270M investment in 2024 ensures future scaling. (Sources: top500.org, NSCC).\\n- **Patents**: High density of AI patents per capita, though absolute volume is lower than AI superpowers. \\n\\nSingapore scores 78, reflecting its status as the regional leader and a top-tier 'compact' AI power, just behind the US, China, and the UK.",
+  "status": "complete"
+}
