@@ -1,0 +1,11 @@
+{
+  "layer_number": 8,
+  "layer_name": "Implementation",
+  "short_name": "adoption",
+  "score": 97,
+  "max_score": 100.0,
+  "weight_pct": 10.0,
+  "weighted_contribution": 9.7,
+  "justification": "Singapore is a global leader in AI implementation, ranking 2nd in the Oxford Insights Government AI Readiness Index 2024 (Score: 84.25, vs US 87.03) and 3rd in the UN E-Government Development Index 2024 (Score: 0.9691). The National AI Strategy 2.0 (NAIS 2.0), launched in Dec 2023, is backed by over S$1 billion in funding and aims for 15,000 AI experts. Enterprise adoption is surging: SME AI adoption tripled to 14.5% in 2024, while 62.5% of non-SME firms have adopted AI. The digital economy now accounts for 18.6% of GDP. (Sources: Oxford Insights 2024, IMDA Singapore Digital Economy Report 2025, United Nations 2024).",
+  "status": "complete"
+}

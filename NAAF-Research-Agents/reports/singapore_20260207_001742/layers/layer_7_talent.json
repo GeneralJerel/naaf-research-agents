@@ -1,0 +1,11 @@
+{
+  "layer_number": 7,
+  "layer_name": "Education & Consulting",
+  "short_name": "talent",
+  "score": 92,
+  "max_score": 100.0,
+  "weight_pct": 10.0,
+  "weighted_contribution": 9.2,
+  "justification": "Singapore is a global elite hub for AI education and research, consistently ranking among the top 3-5 nations for talent density and research quality.\n\n- **University Excellence**: Singapore hosts two of the world's top computer science institutions. **NUS (National University of Singapore)** is ranked **#8** globally in the QS World University Rankings 2026 for Computer Science, while **NTU (Nanyang Technological University)** is ranked **#6** globally in the QS 2025 CS rankings and **#5** globally for Data Science & AI. (Sources: TopUniversities, NUS News, NTU College of Computing).\n- **Research Impact**: Singapore ranks **#3 globally** in the 2024 Tortoise Global AI Index, reflecting a powerhouse research ecosystem. It boasts world-leading field-weighted citation impact in AI and maintains high-impact H-indexes through its top faculty at NUS and NTU. (Sources: Tortoise Media 2024, CSET).\n- **Talent Pool**: Despite its small population, Singapore produces roughly **1,000-1,500** Master's and PhD graduates in CS/IT annually from its flagship universities. NTU's College of Computing alone has ~500 research students, with 62% specializing in AI. (Sources: SingStat, MOE, NTU).\n- **Consulting**: Singapore serves as the primary regional headquarters for global AI consulting and professional services firms in Asia, with significant local presence from NCS, Accenture, and McKinsey. (Source: LinkedIn, EDB Singapore).\n\nThe score of 92 reflects Singapore's world-leading education quality and research intensity, only slightly moderated by its lower absolute volume of graduates compared to superpowers like the US or China.",
+  "status": "complete"
+}

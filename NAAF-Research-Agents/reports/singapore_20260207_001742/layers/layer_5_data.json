@@ -1,0 +1,11 @@
+{
+  "layer_number": 5,
+  "layer_name": "Platform & Data",
+  "short_name": "data",
+  "score": 85,
+  "max_score": 100.0,
+  "weight_pct": 10.0,
+  "weighted_contribution": 8.5,
+  "justification": "Singapore is a global benchmark for data openness, ranking tied for #1 in the Open Data Inventory (ODIN) 2024/25 with a score of 90/100 (Source: Open Data Watch). It also ranks #3 globally in the UN E-Government Survey 2024 (Source: United Nations). Internet penetration is near-total at ~96%, with 5.61M-5.79M users (Source: DataReportal). While absolute data volume is small due to the ~6M population, the data is highly structured and accessible via 'Smart Nation' initiatives, making it high-quality fuel for AI models. The score of 85 reflects elite data governance offset only by limited demographic scale.",
+  "status": "complete"
+}

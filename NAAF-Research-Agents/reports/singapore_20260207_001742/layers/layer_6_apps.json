@@ -1,0 +1,11 @@
+{
+  "layer_number": 6,
+  "layer_name": "Applications & Startups",
+  "short_name": "apps",
+  "score": 82,
+  "max_score": 100.0,
+  "weight_pct": 10.0,
+  "weighted_contribution": 8.2,
+  "justification": "Singapore is a global top-tier hub for AI startups and venture capital, dominating the Southeast Asian ecosystem and ranking among the highest in the world for VC investment per capita.\n\n- **Capital Depth (AI VC Investment)**: In 2024, Singapore-based AI startups secured approximately **US$1.31 billion** in funding (Source: e-Conomy SEA Report 2025). This accounted for nearly **68% to 75%** of the total AI VC investment across the ASEAN-6 economies (Source: OCBC, SecondTalent). Historically, AI VC in Singapore peaked at $2.5 billion in 2021, and the momentum has remained strong with AI representing ~32% of all private funding in the region by H1 2025 (Source: Reuters).\n- **AI Unicorn Count**: Singapore is home to **30–35 unicorns** in total (Source: Tracxn, Failory), with a significant cluster of AI-focused or AI-heavy companies. Notable AI unicorns include **Trax** (Retail AI, $1B+ valuation), **Biofourmis** (Healthcare AI, $1B+ valuation), **Silicon Box** (AI Chiplet design, $1B valuation in 2024), and **Ultragreen.ai** (Surgical AI, $1.3B valuation in 2025). \n- **Ecosystem Dynamics**: The government has further bolstered the sector with a **S$1 billion (US$778M)** commitment over five years (announced Feb 2024) specifically for AI compute, talent, and industry development (Source: Reuters, FDI Intelligence). Singapore ranks as the regional leader and is one of the few global 'compact' superpowers in AI applications, though it naturally lacks the absolute scale of the US or China.\n\nScore of 82 reflects Singapore's position as a premier global hub with elite density and per-capita performance, though absolute funding totals are lower than the massive US/China markets.",
+  "status": "complete"
+}

@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import FrameworkDescription from "@/components/FrameworkDescription";
 import CountryRanking from "@/components/CountryRanking";
 import CreateReportDialog from "@/components/CreateReportDialog";
 
 const Index = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-background">
       <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -27,6 +29,12 @@ const Index = () => {
               <span className="text-border">·</span>
               <span>2023–2025</span>
             </div>
+            <button
+              onClick={() => navigate("/framework")}
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+            >
+              About NAAF
+            </button>
             <CreateReportDialog />
           </div>
         </header>

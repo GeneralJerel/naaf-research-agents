@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { layers } from "@/data/frameworkData";
 
 const FrameworkDescription = () => {
+  const navigate = useNavigate();
   return (
     <div className="space-y-6">
       <div className="space-y-3">
@@ -62,6 +64,12 @@ const FrameworkDescription = () => {
           Role: Policy Research Analyst — using only public data from 2023–2025.
           Prioritizing government, IGOs (World Bank, OECD, IEA), and reputable indices.
         </p>
+        <button
+          onClick={() => navigate("/framework")}
+          className="mt-3 inline-flex items-center gap-1 text-[11px] font-medium text-primary hover:text-primary/80 transition-colors"
+        >
+          Read the full framework article →
+        </button>
       </div>
     </div>
   );
