@@ -180,7 +180,7 @@ async def conduct_research(request: NAAFResearchRequest):
 GOOGLE_API_KEY=your_gemini_api_key
 
 # Sponsor tools (keep these)
-YOUCOM_API_KEY=ydc-sk-aef9a934fd32004c-qt1OkE61SUUD7ypntQnAB9bpbx5ffnas-fec2beff
+YOUCOM_API_KEY=YOUR_YOUCOM_API_KEY
 EXA_API_KEY=your_exa_api_key
 
 # Storage
