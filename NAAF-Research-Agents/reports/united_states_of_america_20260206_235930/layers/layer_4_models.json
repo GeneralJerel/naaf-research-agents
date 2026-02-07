@@ -1,0 +1,11 @@
+{
+  "layer_number": 4,
+  "layer_name": "Model Developers",
+  "short_name": "models",
+  "score": 100,
+  "max_score": 100.0,
+  "weight_pct": 10.0,
+  "weighted_contribution": 10.0,
+  "justification": "The United States is the global leader in AI Model Development, serving as the benchmark for this layer. \n\n**Frontier Model Capacity**: The US dominates the foundation model ecosystem, home to the world's most capable models including OpenAI's GPT-4o and o1, Google's Gemini 1.5/2.0, Anthropic's Claude 3.5/3.7, and Meta's Llama 3.1 (up to 405B parameters). According to the Stanford AI Index 2024, the US produced 61 'notable' AI models in 2023, more than four times the output of China (15). \n\n**Supercomputing**: As of the November 2024 TOP500 list, the US hosts the world's #1 supercomputer, **El Capitan** (1.742 Exaflops), and is the only country with three officially verified exascale systems (El Capitan, Frontier, and Aurora). The US holds 172 systems on the list and commands over 50% of the aggregate Rmax performance of the entire TOP500.\n\n**AI Patents**: While China leads in the raw volume of AI patent filings (e.g., 38,210 GenAI inventions vs. 6,276 for the US per WIPO 2024), the US maintains a significant lead in research impact and citations. The US remains the primary source of the architectural innovations (e.g., Transformers) that underpin the global AI industry.\n\n**Sources**:\n- Stanford AI Index 2024: https://aiindex.stanford.edu/report/ (Notable models and research trends)\n- TOP500 List (November 2024): https://top500.org/lists/top500/list/2024/11/ (Supercomputer rankings)\n- WIPO GenAI Patent Report 2024: https://www.wipo.int/publications/en/details.jsp?id=4747 (Patent volume comparison)\n- arXiv: 'The California Report on Frontier AI Policy' (2025): https://arxiv.org/html/2506.17303v1 (Model list)",
+  "status": "complete"
+}

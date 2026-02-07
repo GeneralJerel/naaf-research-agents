@@ -15,6 +15,7 @@ from .prompts.supervisor import SUPERVISOR_INSTRUCTION
 from .sub_agents.layer_agent import create_layer_agents
 from .tools.youcom_search import youcom_web_search, youcom_domain_search
 from .tools.scoring import score_layer, calculate_overall_score
+from .tools.persistence import save_final_report
 
 # Create the 8 layer research sub-agents
 layer_agents = create_layer_agents(model="gemini-3-flash-preview")
@@ -30,5 +31,5 @@ root_agent = LlmAgent(
     ),
     instruction=SUPERVISOR_INSTRUCTION,
     sub_agents=layer_agents,
-    tools=[youcom_web_search, youcom_domain_search, score_layer, calculate_overall_score],
+    tools=[youcom_web_search, youcom_domain_search, score_layer, calculate_overall_score, save_final_report],
 )

@@ -1,0 +1,11 @@
+{
+  "layer_number": 4,
+  "layer_name": "Model Developers",
+  "short_name": "models",
+  "score": 95,
+  "max_score": 100.0,
+  "weight_pct": 10.0,
+  "weighted_contribution": 9.5,
+  "justification": "China is a dominant global player in AI model development, firmly established as the primary challenger to the United States. \n\n- **Frontier Model Capacity**: China produced **15 'notable AI models' in 2024**, ranking #2 globally (Source: Stanford AI Index 2025). Key domestic foundation models exceed the 10B parameter threshold significantly, including **DeepSeek-V3 (671B parameters)**, **Qwen 3 (235B)**, and **DeepSeek-R1**, the latter of which matches the reasoning capabilities of top-tier U.S. models like OpenAI’s o1 (Source: arXiv, IISS). China leads the world in the production of high-performance open-weight models that frequently outperform Llama 3.1.\n- **TOP500 Supercomputers**: China has **63 systems** in the official November 2024 TOP500 list, ranking 2nd worldwide (Source: TOP500). Furthermore, China is widely reported to operate at least **two secret exascale systems**—Sunway OceanLight (1.3+ exaflops) and Tianhe-3 (1.7+ exaflops)—which are no longer submitted for public benchmarking due to geopolitical sensitivities (Source: Next Platform, HPCwire).\n- **AI Patents**: China is the undisputed global leader in **Generative AI patents**, holding more than 38,000 filings (over 25% of the global total) between 2014 and 2023 (Source: WIPO 2024 Patent Landscape Report). Tencent, Baidu, and Ping An are the top three patent holders globally.\n\n**Scoring Justification**: China receives a 95/100. It leads the world in AI patent volume and open-source model momentum but trails the U.S. in the total number of 'notable' frontier models and high-impact research citations. \n\nSources:\n- Stanford AI Index 2025: https://hai.stanford.edu/ai-index/2025-ai-index-report\n- WIPO GenAI Report 2024: https://www.wipo.int/pressroom/en/articles/2024/article_0009.html\n- TOP500 November 2024: https://top500.org/lists/top500/2024/11/\n- DeepSeek-V3 Technical Report: https://arxiv.org/abs/2412.19437\n- Next Platform (Exascale): https://www.nextplatform.com/2024/02/09/the-mystery-of-tianhe-3-the-worlds-fastest-supercomputer-solved/",
+  "status": "complete"
+}

@@ -91,11 +91,13 @@ if domain-restricted results are insufficient.
 
 ## Scoring
 After gathering evidence, use the `score_layer` tool to record your assessment:
-- Score 0-100 comparing the country to the global leader
-- Include a justification citing your key findings and source URLs
+- **country**: the country name you are researching (required for report saving)
+- **score_0_to_100**: 0-100 comparing the country to the global leader
+- **justification**: cite your key findings and source URLs
 - 100 = best in the world for this layer, 0 = no capability
 
 ## Output
 End your research by calling `score_layer` with your final assessment.
+Always include the `country` parameter so the result is saved to disk.
 The supervisor will collect your score for the overall report.
 """

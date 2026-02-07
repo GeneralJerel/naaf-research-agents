@@ -1,0 +1,11 @@
+{
+  "layer_number": 1,
+  "layer_name": "Power & Electricity",
+  "short_name": "power",
+  "score": 100,
+  "max_score": 100.0,
+  "weight_pct": 20.0,
+  "weighted_contribution": 20.0,
+  "justification": "China is the global leader in Layer 1: Power & Electricity, ranking #1 in both total generation and installed capacity. \n- **Industrial Capacity**: In 2023, China generated approximately 9,300 TWh (EIA), with capacity reaching 3,400 GW in 2024 (EIA). \n- **Cost Efficiency**: Industrial electricity prices are highly competitive, ranging from $0.088 to $0.114/kWh (China Briefing, GlobalPetrolPrices). \n- **Clean Mix**: As of 2024, the generation mix includes 58.2% coal, 13.5% hydropower, 9.8% wind, 8.3% solar, and 4.4% nuclear (Ember, LowCarbonPower). While coal remain significant (58.2%), the low-carbon share (approx. 38%) is growing faster than any other nation. \n- **Grid Reliability**: National SAIDI has improved to approximately 7.11 hours (426 minutes) in 2023, with major industrial/urban centers achieving much higher reliability (often <1 hour). \n- **National Output Percentile**: Rank #1 globally, accounting for roughly 30% of world electricity generation. \nSources: \n- EIA: https://www.eia.gov/international/content/analysis/countries_long/China/ \n- Ember: https://ember-energy.org/countries-and-regions/china/ \n- GlobalPetrolPrices: https://www.globalpetrolprices.com/China/electricity_prices/ \n- IRENA: https://www.irena.org/News/pressreleases/2025/Mar/Record-Breaking-Annual-Growth-in-Renewable-Power-Capacity",
+  "status": "complete"
+}

@@ -1,0 +1,11 @@
+{
+  "layer_number": 1,
+  "layer_name": "Power & Electricity",
+  "short_name": "power",
+  "score": 80,
+  "max_score": 100.0,
+  "weight_pct": 20.0,
+  "weighted_contribution": 16.0,
+  "justification": "Singapore's Power & Electricity layer is characterized by world-leading grid reliability but limited scale and relatively high costs. \n\n- **Industrial Capacity**: Total electricity generation reached ~57 TWh in 2024, with an installed capacity of approximately 12.2 GW (dominated by 10.9 GW of natural gas and growing solar capacity of ~1.3 GW). (Sources: EMA Annual Report 2023/24, Climatescope 2025).\n- **Cost Efficiency**: Industrial/business electricity prices are relatively high at ~USD 0.21–0.22/kWh (approx. SGD 0.28/kWh) as of June 2024. (Sources: GlobalPetrolPrices, EMA).\n- **Grid Reliability & Clean Mix**: Singapore boasts one of the most reliable grids globally, with a System Average Interruption Duration Index (SAIDI) of just **0.14 minutes** in 2023. The energy mix is ~95% natural gas (cleaner than coal but still fossil-based), with solar providing ~3% of generation. (Source: EMA Annual Sustainability Report 2023/24).\n- **National Output Percentile**: Ranks roughly in the top 30% of countries by total volume (approx. 50th-60th globally), which is high given its size but low compared to AI superpowers like the US or China.\n\nSingapore is a premium location for data centers due to near-zero outage risk, though high prices and land constraints for renewable expansion are significant trade-offs.\n",
+  "status": "complete"
+}

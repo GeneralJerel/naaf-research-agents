@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ResearchResult } from "@/lib/mockResearch";
+import { FormattedMarkdown } from "@/lib/formatMarkdown";
 import { layers } from "@/data/frameworkData";
 import { usaReport } from "@/data/usaReport";
 import { chinaReport } from "@/data/chinaReport";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { CountryNews } from "@/components/CountryNews";
-import { ArrowLeft, ExternalLink, TrendingUp, TrendingDown, Minus, Newspaper, BarChart3, Shield, AlertTriangle, Lightbulb, ChevronRight } from "lucide-react";
+import { ArrowLeft, ExternalLink, TrendingUp, TrendingDown, Minus, Newspaper, BarChart3, Shield, AlertTriangle, Lightbulb } from "lucide-react";
 
 const hardcodedReports: Record<string, ResearchResult> = {
   "united states": usaReport,
+  "united states of america": usaReport,
   usa: usaReport,
   china: chinaReport,
 };
@@ -27,7 +29,13 @@ const getScoreBg = (score: number) => {
   return "bg-score-low/10 border-score-low/20";
 };
 
-const getTierInfo = (score: number) => {
+const getTierInfo = (score: number, reportTier?: string) => {
+  // Use explicit tier from report data if available
+  if (reportTier) {
+    const color = score >= 80 ? "text-score-high" : score >= 55 ? "text-score-mid" : "text-score-low";
+    const bg = score >= 80 ? "bg-score-high/10 border-score-high/25" : score >= 55 ? "bg-score-mid/10 border-score-mid/25" : "bg-score-low/10 border-score-low/25";
+    return { label: reportTier, color, bg };
+  }
   if (score >= 80) return { label: "Tier 1 · Hegemon", color: "text-score-high", bg: "bg-score-high/10 border-score-high/25" };
   if (score >= 55) return { label: "Tier 2 · Contender", color: "text-score-mid", bg: "bg-score-mid/10 border-score-mid/25" };
   return { label: "Tier 3 · Emerging", color: "text-score-low", bg: "bg-score-low/10 border-score-low/25" };
@@ -78,6 +86,22 @@ const ScoreRing = ({ score, size = 72 }: { score: number; size?: number }) => {
   );
 };
 
+/** Show top N strongest/weakest layers, handling ties gracefully */
+const getTopLayers = (
+  layerDetails: ResearchResult["layerDetails"],
+  direction: "strongest" | "weakest",
+  maxDisplay = 3,
+) => {
+  const sorted = [...layerDetails].sort((a, b) =>
+    direction === "strongest" ? b.score - a.score : a.score - b.score
+  );
+  const cutoffScore = sorted[0]?.score;
+  // Include all ties at the top score, but cap at maxDisplay
+  const tied = sorted.filter((l) => l.score === cutoffScore);
+  if (tied.length <= maxDisplay) return tied;
+  return tied.slice(0, maxDisplay);
+};
+
 const Report = () => {
   const { countryName } = useParams();
   const navigate = useNavigate();
@@ -110,11 +134,16 @@ const Report = () => {
     );
   }
 
-  const tier = getTierInfo(report.country.overall);
-  const maxScore = Math.max(...report.layerDetails.map((ld) => ld.score));
-  const minScore = Math.min(...report.layerDetails.map((ld) => ld.score));
-  const strongLayers = report.layerDetails.filter((ld) => ld.score === maxScore);
-  const weakLayers = report.layerDetails.filter((ld) => ld.score === minScore);
+  const tier = getTierInfo(report.country.overall, report.tier);
+  const strongLayers = getTopLayers(report.layerDetails, "strongest", 3);
+  const weakLayers = getTopLayers(report.layerDetails, "weakest", 2);
+  const maxScore = strongLayers[0]?.score ?? 0;
+  const minScore = weakLayers[0]?.score ?? 0;
+
+  // Data period from report or fallback
+  const dataPeriod = report.dataYears
+    ? `${report.dataYears[0]}–${report.dataYears[report.dataYears.length - 1]}`
+    : "2023–2025";
 
   return (
     <div className="min-h-screen bg-background">
@@ -154,10 +183,10 @@ const Report = () => {
             </div>
           </div>
 
-          {/* Strategic overview */}
-          {report.strategicSummary?.overview && (
+          {/* Executive summary (preferred) or strategic overview fallback */}
+          {(report.executiveSummary || report.strategicSummary?.overview) && (
             <p className="mt-5 text-sm text-foreground/75 leading-relaxed border-t border-border pt-5">
-              {report.strategicSummary.overview}
+              {report.executiveSummary ?? report.strategicSummary?.overview}
             </p>
           )}
 
@@ -167,6 +196,11 @@ const Report = () => {
               <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1">Strongest</p>
               <p className="font-heading font-semibold text-foreground">
                 {strongLayers.map((l) => `L${l.layerNumber} ${l.layerName}`).join(", ")}
+                {strongLayers.length < report.layerDetails.filter((ld) => ld.score === maxScore).length && (
+                  <span className="text-xs text-muted-foreground ml-1">
+                    +{report.layerDetails.filter((ld) => ld.score === maxScore).length - strongLayers.length} more
+                  </span>
+                )}
                 <span className={`ml-1.5 text-xs ${getScoreColor(maxScore)}`}>({maxScore})</span>
               </p>
             </div>
@@ -179,7 +213,7 @@ const Report = () => {
             </div>
             <div>
               <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1">Data Period</p>
-              <p className="font-heading font-semibold text-foreground">2023–2025</p>
+              <p className="font-heading font-semibold text-foreground">{dataPeriod}</p>
             </div>
           </div>
         </header>
@@ -188,6 +222,7 @@ const Report = () => {
         <div className="mb-8 grid grid-cols-4 sm:grid-cols-8 gap-2">
           {layers.map((layer) => {
             const score = report.country.layers[layer.number] ?? 0;
+            const ld = report.layerDetails.find((d) => d.layerNumber === layer.number);
             return (
               <div key={layer.number} className="text-center space-y-1.5">
                 <div
@@ -200,6 +235,11 @@ const Report = () => {
                 <p className="text-[9px] text-muted-foreground leading-tight font-medium">
                   L{layer.number} {layer.name.split(" ")[0]}
                 </p>
+                {ld?.weightedContribution != null && (
+                  <p className="text-[8px] text-muted-foreground/60">
+                    {ld.weightedContribution.toFixed(1)}/{(ld.weightPct ?? 0).toFixed(0)}
+                  </p>
+                )}
               </div>
             );
           })}
@@ -252,6 +292,11 @@ const Report = () => {
                         </h3>
                         <p className="text-[10px] text-muted-foreground mt-0.5">
                           {layers.find((l) => l.number === ld.layerNumber)?.weight} weight
+                          {ld.weightedContribution != null && (
+                            <span className="ml-1.5 text-muted-foreground/70">
+                              · {ld.weightedContribution.toFixed(1)} pts contributed
+                            </span>
+                          )}
                         </p>
                       </div>
                     </div>
@@ -264,7 +309,7 @@ const Report = () => {
                   </div>
 
                   {/* Layer body */}
-                    <div className="px-5 py-4">
+                  <div className="px-5 py-4">
                     <div className="mb-4">
                       <div className="h-1.5 w-full rounded-full bg-secondary overflow-hidden">
                         <div
@@ -277,31 +322,41 @@ const Report = () => {
                       </div>
                     </div>
 
-                    <p className="text-sm text-foreground/80 leading-relaxed">
-                      {ld.findings}
-                    </p>
+                    <FormattedMarkdown text={ld.findings} />
 
                     {ld.keyData && (
-                      <div className="mt-3 rounded-lg bg-primary/5 border border-primary/10 px-4 py-2.5">
+                      <div className="mt-4 rounded-lg bg-primary/5 border border-primary/10 px-4 py-2.5">
                         <p className="text-[10px] uppercase tracking-wider text-primary font-semibold mb-0.5">Key Data</p>
                         <p className="text-sm text-foreground/90 font-medium">{ld.keyData}</p>
                       </div>
                     )}
 
-                    <div className="mt-4 pt-3 border-t border-border/50 flex flex-wrap gap-2">
-                      <span className="text-[9px] uppercase tracking-wider text-muted-foreground font-medium self-center mr-1">Sources</span>
-                      {ld.sources.map((src, i) => (
-                        <a
-                          key={i}
-                          href={src}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 rounded-md bg-secondary/80 px-2.5 py-1 text-[10px] text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
-                        >
-                          <ExternalLink className="h-2.5 w-2.5" />
-                          {new URL(src).hostname.replace("www.", "")}
-                        </a>
-                      ))}
+                    <div className="mt-4 pt-3 border-t border-border/50">
+                      <span className="text-[9px] uppercase tracking-wider text-muted-foreground font-medium mr-2">
+                        Sources ({ld.sources.length})
+                      </span>
+                      <div className="mt-2 flex flex-wrap gap-1.5">
+                        {ld.sources.map((src, i) => {
+                          let hostname: string;
+                          try {
+                            hostname = new URL(src).hostname.replace("www.", "");
+                          } catch {
+                            hostname = src;
+                          }
+                          return (
+                            <a
+                              key={i}
+                              href={src}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 rounded-md bg-secondary/80 px-2.5 py-1 text-[10px] text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                            >
+                              <ExternalLink className="h-2.5 w-2.5" />
+                              {hostname}
+                            </a>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
                 </article>

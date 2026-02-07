@@ -76,8 +76,8 @@ export const sampleCountries: CountryScore[] = [
   {
     country: "United States",
     code: "US",
-    overall: 80,
-    layers: { 1: 45, 2: 80, 3: 100, 4: 100, 5: 50, 6: 100, 7: 90, 8: 100 },
+    overall: 96,
+    layers: { 1: 88, 2: 94, 3: 100, 4: 100, 5: 95, 6: 100, 7: 100, 8: 100 },
   },
   {
     country: "China",

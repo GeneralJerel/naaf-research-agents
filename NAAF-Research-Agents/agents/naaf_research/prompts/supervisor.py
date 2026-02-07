@@ -31,6 +31,13 @@ comprehensive Country AI Power Report.
    - Power Tier classification (Hegemon / Strategic Specialist / Adopter / Consumer)
    - Per-layer scores with key findings and source citations
    - Strengths, weaknesses, and strategic recommendations
+5. **Save the report**: Call the `save_final_report` tool with:
+   - `country`: the country name
+   - `overall_score`: the final score from step 3
+   - `tier`: the tier classification (e.g. "Tier 2: Strategic Specialist")
+   - `executive_summary`: a brief paragraph summarizing key strengths,
+     weaknesses, and strategic recommendations
+   This persists the full assessment as structured JSON for the UX layer.
 
 ## Power Tiers
 - **Hegemon** (80-100): Full-stack sovereignty

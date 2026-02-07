@@ -13,6 +13,7 @@ import os
 from typing import Optional
 
 import httpx
+from google.adk.tools import ToolContext
 
 logger = logging.getLogger(__name__)
 
@@ -54,7 +55,30 @@ else:
         logger.warning(f"⚠️  Could not validate YDC_API_KEY at startup: {exc}")
 
 
-async def youcom_web_search(query: str, num_results: int = 8) -> str:
+def _track_sources(hits: list, query: str, tool_context: Optional[ToolContext]) -> None:
+    """Append search result URLs + metadata to session state for later persistence."""
+    if tool_context is None:
+        return
+
+    collected = tool_context.state.get("collected_sources", [])
+    for hit in hits:
+        url = hit.get("url", "")
+        if url:
+            collected.append({
+                "url": url,
+                "title": hit.get("title", ""),
+                "query": query,
+                "snippet": (hit.get("snippets", [""])[0][:200]
+                            if hit.get("snippets") else hit.get("description", "")[:200]),
+            })
+    tool_context.state["collected_sources"] = collected
+
+
+async def youcom_web_search(
+    query: str,
+    num_results: int = 8,
+    tool_context: Optional[ToolContext] = None,
+) -> str:
     """Search the web using the You.com Search API.
 
     Use this tool to find information on the public web. Results include
@@ -64,6 +88,7 @@ async def youcom_web_search(query: str, num_results: int = 8) -> str:
         query: The search query. Be specific and include year constraints
                for recency (e.g. 'Brazil electricity generation TWh 2024').
         num_results: Number of results to return (default 8, max 10).
+        tool_context: Injected by ADK — used to track source URLs in session state.
 
     Returns:
         Formatted search results with titles, URLs, and snippets.
@@ -94,6 +119,9 @@ async def youcom_web_search(query: str, num_results: int = 8) -> str:
     if not hits:
         return f"No results found for: {query}"
 
+    # Track all source URLs in session state for sources.json
+    _track_sources(hits, query, tool_context)
+
     results = []
     for i, hit in enumerate(hits, 1):
         title = hit.get("title", "N/A")
@@ -114,6 +142,7 @@ async def youcom_domain_search(
     query: str,
     domains: str,
     num_results: int = 8,
+    tool_context: Optional[ToolContext] = None,
 ) -> str:
     """Search the web restricted to specific authoritative domains.
 
@@ -125,6 +154,7 @@ async def youcom_domain_search(
         domains: Comma-separated list of domains to restrict to
                  (e.g. 'iea.org,worldbank.org,oecd.org').
         num_results: Number of results to return (default 8, max 10).
+        tool_context: Injected by ADK — used to track source URLs in session state.
 
     Returns:
         Formatted search results filtered to the specified domains.
@@ -136,4 +166,4 @@ async def youcom_domain_search(
     else:
         full_query = query
 
-    return await youcom_web_search(full_query, num_results)
+    return await youcom_web_search(full_query, num_results, tool_context)

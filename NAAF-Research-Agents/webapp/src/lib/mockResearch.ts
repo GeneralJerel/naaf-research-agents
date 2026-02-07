@@ -30,10 +30,15 @@ export interface ResearchResult {
     score: number;
     findings: string;
     keyData?: string;
+    weightPct?: number;
+    weightedContribution?: number;
     sources: string[];
   }[];
   strategicSummary?: StrategicSummary;
   generatedAt: string;
+  tier?: string;
+  executiveSummary?: string;
+  dataYears?: number[];
 }
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));

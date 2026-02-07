@@ -1,0 +1,11 @@
+{
+  "layer_number": 5,
+  "layer_name": "Platform & Data",
+  "short_name": "data",
+  "score": 95,
+  "max_score": 100.0,
+  "weight_pct": 10.0,
+  "weighted_contribution": 9.5,
+  "justification": "The United States is a global leader in data openness and statistical quality, serving as a primary hub for AI training data. \n\n**Data Openness**: The U.S. ranks #1 globally in the **Global Data Barometer (GDB) 2022** with a score of **70/100** (the highest achieved score in the index), leading in data governance and availability for public good. It also scores **93.43/100** in the **World Bank Statistical Performance Indicator (SPI)** for 2023, reflecting a highly mature and transparent national statistical system. Although the U.S. was not included in the 2023 OECD OURdata Index due to reporting differences at the federal level, its standing in other authoritative global indices is top-tier.\n\n**Data Volume Potential**: The U.S. has **331.1 million internet users** as of January 2024, with a penetration rate of **97.1%**. While it ranks 3rd in raw volume behind China and India, the U.S. data ecosystem is characterized by exceptionally high accessibility, commercial value, and digital diversity, making it the world's most valuable pool for frontier model training.\n\n**Sources**:\n- Global Data Barometer (2022 Rank #1): https://globaldatabarometer.org/\n- World Bank SPI Score (Dec 2023): https://data.worldbank.org/indicator/IQ.SPI.OVRL?locations=US\n- Digital 2024: USA: https://datareportal.com/reports/digital-2024-united-states-of-america (Internet pop)\n- Open Data Watch ODIN Profile (2024): https://odin.opendatawatch.com/Report/countryProfileUpdated/USA?year=2024",
+  "status": "complete"
+}

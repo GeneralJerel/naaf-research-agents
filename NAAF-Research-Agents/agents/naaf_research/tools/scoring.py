@@ -3,9 +3,17 @@
 Implements the Relative Power Index (RPI) formula from assessment-framework.md.
 Layer weights: Power 20%, Chips 15%, Cloud 15%, Models 10%, Data 10%,
                Apps 10%, Talent 10%, Adoption 10%.
+
+When a ToolContext is available (ADK runtime), score_layer also:
+- Persists each layer result as JSON to reports/{country}_{ts}/layers/
+- Stores layer data in session state for the final report assembler
 """
 
+import json
+from pathlib import Path
 from typing import Optional
+
+from google.adk.tools import ToolContext
 
 # Layer weights (percentage of 100)
 LAYER_WEIGHTS = {
@@ -19,11 +27,35 @@ LAYER_WEIGHTS = {
     8: 10.0,  # Implementation
 }
 
+LAYER_NAMES = {
+    1: "Power & Electricity",
+    2: "Chipset Manufacturers",
+    3: "Cloud & Data Centers",
+    4: "Model Developers",
+    5: "Platform & Data",
+    6: "Applications & Startups",
+    7: "Education & Consulting",
+    8: "Implementation",
+}
+
+LAYER_SHORT_NAMES = {
+    1: "power",
+    2: "chips",
+    3: "cloud",
+    4: "models",
+    5: "data",
+    6: "apps",
+    7: "talent",
+    8: "adoption",
+}
+
 
 def score_layer(
     layer_number: int,
     score_0_to_100: float,
     justification: str,
+    country: str = "",
+    tool_context: Optional[ToolContext] = None,
 ) -> str:
     """Record a scored assessment for a single NAAF layer.
 
@@ -37,6 +69,10 @@ def score_layer(
             0 = no capability, 100 = global leader.
         justification: Brief explanation of the score with key data points
             and source URLs that support it.
+        country: The country being assessed (e.g. 'China'). Used to name
+            the report output folder.
+        tool_context: Injected by ADK — used to persist results to disk
+            and session state.
 
     Returns:
         Confirmation of the scored layer with its weighted contribution.
@@ -49,18 +85,35 @@ def score_layer(
 
     weight = LAYER_WEIGHTS[layer_number]
     weighted_contribution = (score_0_to_100 / 100.0) * weight
+    name = LAYER_NAMES[layer_number]
+    short = LAYER_SHORT_NAMES[layer_number]
 
-    layer_names = {
-        1: "Power & Electricity",
-        2: "Chipset Manufacturers",
-        3: "Cloud & Data Centers",
-        4: "Model Developers",
-        5: "Platform & Data",
-        6: "Applications & Startups",
-        7: "Education & Consulting",
-        8: "Implementation",
-    }
-    name = layer_names[layer_number]
+    # ------------------------------------------------------------------
+    # Persist to session state and disk when running inside ADK
+    # ------------------------------------------------------------------
+    if tool_context is not None:
+        # Store country name in state (first layer to run sets it)
+        if country:
+            tool_context.state["country"] = country
+
+        # Build the structured layer result dict
+        layer_result = {
+            "layer_number": layer_number,
+            "layer_name": name,
+            "short_name": short,
+            "score": round(score_0_to_100, 1),
+            "max_score": 100.0,
+            "weight_pct": weight,
+            "weighted_contribution": round(weighted_contribution, 2),
+            "justification": justification,
+            "status": "complete",
+        }
+
+        # Store in session state for save_final_report to pick up
+        tool_context.state[f"layer_{layer_number}_json"] = layer_result
+
+        # Write layer JSON to disk
+        _write_layer_json(layer_number, short, layer_result, country, tool_context)
 
     return (
         f"## Layer {layer_number}: {name}\n"
@@ -69,6 +122,22 @@ def score_layer(
         f"**Weighted Contribution**: {weighted_contribution:.2f} points\n"
         f"**Justification**: {justification}\n"
     )
+
+
+def _write_layer_json(
+    layer_number: int,
+    short_name: str,
+    layer_result: dict,
+    country: str,
+    tool_context: ToolContext,
+) -> None:
+    """Write an individual layer result JSON file to the report directory."""
+    from .persistence import _get_or_create_report_dir
+
+    resolved_country = country or tool_context.state.get("country", "unknown")
+    report_dir = _get_or_create_report_dir(resolved_country, tool_context)
+    layer_file = report_dir / "layers" / f"layer_{layer_number}_{short_name}.json"
+    layer_file.write_text(json.dumps(layer_result, indent=2, ensure_ascii=False))
 
 
 def calculate_overall_score(
@@ -110,17 +179,6 @@ def calculate_overall_score(
         8: layer_8_score,
     }
 
-    layer_names = {
-        1: "Power & Electricity",
-        2: "Chipset Manufacturers",
-        3: "Cloud & Data Centers",
-        4: "Model Developers",
-        5: "Platform & Data",
-        6: "Applications & Startups",
-        7: "Education & Consulting",
-        8: "Implementation",
-    }
-
     overall = 0.0
     breakdown_lines = []
     for num in range(1, 9):
@@ -129,7 +187,7 @@ def calculate_overall_score(
         contribution = (raw / 100.0) * weight
         overall += contribution
         breakdown_lines.append(
-            f"  Layer {num} ({layer_names[num]}): "
+            f"  Layer {num} ({LAYER_NAMES[num]}): "
             f"{raw:.1f}/100 x {weight}% = {contribution:.2f} pts"
         )
 
