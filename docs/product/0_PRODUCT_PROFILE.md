@@ -40,10 +40,11 @@ an overall **AI Power Score (0-100)** and tier classification.
 ## Web Application Pages
 | Route | Description |
 |-------|-------------|
-| `/` | Dashboard — country rankings with layer breakdown bars, framework overview sidebar |
-| `/framework` | Deep-dive article explaining the full NAAF methodology, all 8 layers with metrics & scoring rubrics, power tiers, RPI formula, and agent research protocol |
-| `/report/:country` | Per-country AI Power Report with score ring, layer-by-layer analysis, sources, strategic summary |
-| `/research/:country` | Live agent research view (SSE streaming during assessment) |
+| `/` | Framework overview — 8-layer index, executive summary, methodology, and applications |
+| `/articles` | Article listing — filterable by category (Analysis, Methodology), featured articles grid |
+| `/articles/what-is-the-naaf` | **What**: Full-stack framework explanation, all 8 layers with metrics, data sources, weight rationale, power tiers |
+| `/articles/how-naaf-works` | **How**: Multi-agent architecture, research protocol, tool stack, scoring engine, persistence, Google ADK |
+| `/articles/why-ai-sovereignty-matters` | **Why**: The thesis — supply chain blind spots in existing indices, full-stack dependency argument, public-data principle |
 
 ## Target Users
 - Policy researchers comparing AI readiness across nations

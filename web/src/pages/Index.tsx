@@ -1,36 +1,12 @@
 import FrameworkDescription from "@/components/FrameworkDescription";
-import ContactForm from "@/components/ContactForm";
+import Header from "@/components/Header";
 import { Separator } from "@/components/ui/separator";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background font-body">
       <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        {/* Navigation */}
-        <header className="mb-12 flex items-center justify-between border-b border-border pb-5">
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary">
-              <span className="font-heading text-sm font-bold text-primary-foreground">AI</span>
-            </div>
-            <div>
-              <span className="font-heading text-base font-semibold tracking-tight text-foreground">
-                National AI Assessment Framework
-              </span>
-              <p className="text-[11px] text-muted-foreground tracking-wide">
-                Evidence-based policy intelligence
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-5">
-            <nav className="hidden items-center gap-5 text-[11px] font-medium uppercase tracking-widest text-muted-foreground sm:flex">
-              <span>8 Layers</span>
-              <span>Public Data</span>
-              <span>2023–2025</span>
-            </nav>
-            <Separator orientation="vertical" className="hidden h-5 sm:block" />
-            <ContactForm />
-          </div>
-        </header>
+        <Header />
 
         {/* Main content */}
         <div className="grid gap-12 lg:grid-cols-[1fr_1.7fr] lg:gap-16">
