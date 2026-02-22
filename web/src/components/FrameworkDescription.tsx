@@ -1,37 +1,45 @@
 import { layers } from "@/data/frameworkData";
 
+const tiers = [
+  { label: "Hegemon", range: "80–100", desc: "Full-stack AI sovereignty" },
+  { label: "Strategic Specialist", range: "50–79", desc: "Strong in select layers" },
+  { label: "Adopter", range: "30–49", desc: "Consumes foreign AI" },
+  { label: "Consumer", range: "0–29", desc: "Fully import-dependent" },
+];
+
 const FrameworkDescription = () => {
   return (
-    <div className="space-y-6">
-      <div className="space-y-3">
-        <h2 className="font-heading text-xs uppercase tracking-wider text-primary font-semibold">
+    <div className="space-y-8">
+      <div className="space-y-4">
+        <p className="text-[11px] font-semibold uppercase tracking-widest text-primary">
           Framework Overview
-        </h2>
-        <h1 className="font-heading text-3xl font-bold leading-tight text-foreground lg:text-4xl">
+        </p>
+        <h1 className="font-heading text-[32px] font-bold leading-[1.15] tracking-tight text-foreground lg:text-[38px]">
           National AI
           <br />
           Assessment
           <br />
           <span className="text-primary">Framework</span>
         </h1>
-        <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
-          Ranking countries across the{" "}
-          <span className="text-foreground font-medium">eight layers of the AI industry</span>{" "}
-          — from physical constraints to economic impact. Designed for AI agents
-          researching public government and IGO data.
+        <p className="max-w-sm text-sm leading-[1.7] text-muted-foreground">
+          Evaluating countries across{" "}
+          <span className="font-medium text-foreground">eight layers of the AI value chain</span>
+          {" "}— from physical infrastructure to economic implementation — using only 
+          public, verifiable data.
         </p>
       </div>
 
-      <div className="space-y-1.5">
+      {/* Layer Index */}
+      <div className="space-y-0.5">
         {layers.map((layer) => (
           <div
             key={layer.number}
-            className="group flex items-center gap-3 rounded-md border border-transparent px-3 py-2 transition-all hover:border-border hover:bg-secondary/50"
+            className="group flex items-center gap-3 rounded-md px-3 py-2 transition-colors hover:bg-secondary/60"
           >
             <span
-              className="flex h-6 w-6 shrink-0 items-center justify-center rounded font-heading text-xs font-bold"
+              className="flex h-6 w-6 shrink-0 items-center justify-center rounded font-heading text-[11px] font-bold"
               style={{
-                backgroundColor: `hsl(var(--layer-${layer.number}) / 0.15)`,
+                backgroundColor: `hsl(var(--layer-${layer.number}) / 0.12)`,
                 color: `hsl(var(--layer-${layer.number}))`,
               }}
             >
@@ -39,10 +47,10 @@ const FrameworkDescription = () => {
             </span>
             <div className="min-w-0 flex-1">
               <div className="flex items-center justify-between gap-2">
-                <span className="font-heading text-xs font-semibold text-foreground">
+                <span className="text-xs font-semibold text-foreground">
                   {layer.name}
                 </span>
-                <span className="font-heading text-[10px] text-muted-foreground">
+                <span className="text-[10px] tabular-nums text-muted-foreground">
                   {layer.weight}
                 </span>
               </div>
@@ -54,14 +62,24 @@ const FrameworkDescription = () => {
         ))}
       </div>
 
-      <div className="rounded-lg border border-border bg-secondary/30 p-4">
-        <h3 className="font-heading text-xs font-semibold text-foreground mb-2">
-          Agent Research Protocol
+      {/* Power Tiers */}
+      <div className="rounded-lg border border-border p-4">
+        <h3 className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-foreground">
+          Scoring Tiers
         </h3>
-        <p className="text-[11px] leading-relaxed text-muted-foreground">
-          Role: Policy Research Analyst — using only public data from 2023–2025.
-          Prioritizing government, IGOs (World Bank, OECD, IEA), and reputable indices.
-        </p>
+        <div className="space-y-2">
+          {tiers.map((tier) => (
+            <div key={tier.label} className="flex items-baseline justify-between gap-2">
+              <div className="flex items-baseline gap-2">
+                <span className="text-xs font-semibold text-foreground">{tier.label}</span>
+                <span className="text-[10px] text-muted-foreground">{tier.desc}</span>
+              </div>
+              <span className="text-[10px] tabular-nums font-medium text-muted-foreground">
+                {tier.range}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
